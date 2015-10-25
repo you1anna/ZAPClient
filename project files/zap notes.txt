@@ -112,3 +112,14 @@ Via the UI:
 # migrate to tests
 
 http://zap/OTHER/core/other/htmlreport/
+
+# Sessions
+
+# Context
+# How to spider as a user VIA API
+# OAuth 2 session headers are not supported, but cookie based authentication is. Is it right that we store auth in the
+cookie and therefore it's authenticated?
+
+Zest script to authenticate - how to run?
+
+
