@@ -1,0 +1,114 @@
+
+ZAP
+
+C:\Users\robin.miklinski\OWASP ZAP\config.xml
+- disable API key 
+- other check boxes
+--
+
+Python client API
+
+The Python client can be downloaded from PyPI (download link in The ZAP API page) or it can be installed using:
+pip install python-owasp-zap-v2.4
+
+Building
+
+In order to change/develop ZAP Python API, we need to change the actual code in python/api/src/zapv2/ directory and then run the following commands to build that code and install it system-wide:
+cd python/api/
+python setup.py build
+sudo python setup.py install
+
+
+C:\dev\Huddle\New folder\python-owasp-zap-v2.4-0.0.5\src\zapv2
+
+
+return urllib.urlopen(*args, **kwargs).read()
+
+to
+
+return urllib.request.urlopen(*args, **kwargs).read()]
+
+scan value
+
+'http://zap/JSON/spider/action/scan/?url=https%3A%2F%2Fwww.google.co.uk%2F&apikey='
+
+--
+
+
+C:\Program Files\Parallels\Parallels Tools\Applications;C:\ProgramData\Oracle\Java\javapath;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\Windows Kits\8.1\Windows Performance Toolkit\;C:\Python34;C:\Python34\Scripts;C:\Program Files\Microsoft SDKs\TypeScript\1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;%systemroot%\System32\WindowsPowerShell\v1.0\;%systemroot%\System32\WindowsPowerShell\v1.0\;C:\UnixUtils
+
+C:\Program Files\Parallels\Parallels Tools\Applications;C:\ProgramData\Oracle\Java\javapath;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\Windows Kits\8.1\Windows Performance Toolkit\;C:\Python34;C:\Python34\Scripts;C:\Program Files\Microsoft SDKs\TypeScript\1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;%systemroot%\System32\WindowsPowerShell\v1.0\;%systemroot%\System32\WindowsPowerShell\v1.0\;C:\UnixUtils;C:\Python27;C:\Python27\Scripts
+
+
+
+Set both python dirs and renamed python to python3 
+
+python -> runs 2.7
+python3 -> runs 3.4
+
+--
+
+
+Disable zpi key / other settings in API settings on the UI
+
+--
+View -> show all tabs
+
+--
+
+LOG FILE
+C:\Users\miklinski\OWASP ZAP
+Add 
+log4j.logger.org.zaproxy.zap.extension.api=debug
+
+to log4j.properties
+-> watch logs all the time
+--
+
+zap.spider.status
+zap.spider.status()
+zap.spider.status.get('status')
+--
+
+**Support**
+https://groups.google.com/forum/#!forum/zaproxy-users
+
+Asking the API for the scanner status using the url /JSON/ascan/view/status/?zapapiformat=JSON.
+zap.spider.status is a property NOT A METHOD
+
+
+Authentication
+https://github.com/zaproxy/zap-core-help/wiki/HelpStartConceptsAuthentication
+https://github.com/zaproxy/zaproxy/wiki/FAQformauth
+explain user steps...
+
+Form-Based Authentication
+To configure this authentication method, you need to supply the login url, to which the login request is performed, 
+the request body (POST data), if needed, and identify the parameters used to supply the 
+'username' and 'password'. If no request body is supplied, the login request is performed as a HTTP GET, 
+otherwise an HTTP POST is used. The credentials themselves are configured in the Users tab. Read more...
+
+EXCLUDE logoff link from spider otherwise it will click it and logout
+
+Via the UI:
+
+    Explore your app while proxying through ZAP
+    Login using a valid username and password
+    Define a Context, eg by right clicking the top node of your app in the Sites tab and selecting "Include in Context"
+    Find the 'Login request' in the Sites or History tab
+    Right click it and select "Flag as Context" / " Form-based Auth Login request"
+    Check that the Username and Password parameters are set correctly - they almost certainly wont be!
+    Find a string in a response which can be used to determine if the user is logged in or not
+    Highlight this string, right click and select "Flag as Context" / " Logged in/out Indicator" as relevant - you only need to set one of these, not both
+    Double click on the relevant Context node and navigate to the "Users" page - check the user details are correct, add any other users you want to use and enable them all
+    Navigate to the Context "Forced User" page and make sure the user you want to test is selected
+    The "Forced User Mode disabled - click to enable" button should now be enabled
+    Pressing this button in will cause ZAP to resend the authentication request whenever it detects that the user is no longer logged in, ie by using the 'logged in' or 'logged out' indicator.
+
+	api cals to scan as user
+	https://groups.google.com/forum/#!searchin/zaproxy-users/setauthentication/zaproxy-users/BrVE0Zp_ug4/QNSoMXcVg2YJ
+
+
+# migrate to tests
+
+http://zap/OTHER/core/other/htmlreport/
