@@ -79,7 +79,11 @@ zap.spider.status is a property NOT A METHOD
 
 Authentication
 https://github.com/zaproxy/zap-core-help/wiki/HelpStartConceptsAuthentication
+https://vimeo.com/101953742
+https://groups.google.com/forum/#!searchin/zaproxy-users/login/zaproxy-users/aDfultnXgM8/B7KRcg0C7ZYJ
+https://github.com/zaproxy/zap-core-help/wiki/HelpUiDialogsSessionContexts
 https://github.com/zaproxy/zaproxy/wiki/FAQformauth
+
 explain user steps...
 
 Form-Based Authentication
@@ -87,6 +91,7 @@ To configure this authentication method, you need to supply the login url, to wh
 the request body (POST data), if needed, and identify the parameters used to supply the 
 'username' and 'password'. If no request body is supplied, the login request is performed as a HTTP GET, 
 otherwise an HTTP POST is used. The credentials themselves are configured in the Users tab. Read more...
+
 
 EXCLUDE logoff link from spider otherwise it will click it and logout
 
