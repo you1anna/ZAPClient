@@ -18,38 +18,25 @@ cd python/api/
 python setup.py build
 sudo python setup.py install
 
+Disable zpi key / other settings in API settings on the UI
+
 
 C:\dev\Huddle\New folder\python-owasp-zap-v2.4-0.0.5\src\zapv2
 
-
-return urllib.urlopen(*args, **kwargs).read()
-
-to
-
-return urllib.request.urlopen(*args, **kwargs).read()]
-
 scan value
-
 'http://zap/JSON/spider/action/scan/?url=https%3A%2F%2Fwww.google.co.uk%2F&apikey='
 
 --
 
-
+PARELLELS Path config
 C:\Program Files\Parallels\Parallels Tools\Applications;C:\ProgramData\Oracle\Java\javapath;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\Windows Kits\8.1\Windows Performance Toolkit\;C:\Python34;C:\Python34\Scripts;C:\Program Files\Microsoft SDKs\TypeScript\1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;%systemroot%\System32\WindowsPowerShell\v1.0\;%systemroot%\System32\WindowsPowerShell\v1.0\;C:\UnixUtils
 
 C:\Program Files\Parallels\Parallels Tools\Applications;C:\ProgramData\Oracle\Java\javapath;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\Windows Kits\8.1\Windows Performance Toolkit\;C:\Python34;C:\Python34\Scripts;C:\Program Files\Microsoft SDKs\TypeScript\1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;%systemroot%\System32\WindowsPowerShell\v1.0\;%systemroot%\System32\WindowsPowerShell\v1.0\;C:\UnixUtils;C:\Python27;C:\Python27\Scripts
-
-
 
 Set both python dirs and renamed python to python3 
 
 python -> runs 2.7
 python3 -> runs 3.4
-
---
-
-
-Disable zpi key / other settings in API settings on the UI
 
 --
 View -> show all tabs
@@ -77,14 +64,14 @@ Asking the API for the scanner status using the url /JSON/ascan/view/status/?zap
 zap.spider.status is a property NOT A METHOD
 
 
-Authentication
+## Authentication ##
+
 https://github.com/zaproxy/zap-core-help/wiki/HelpStartConceptsAuthentication
 https://vimeo.com/101953742
 https://groups.google.com/forum/#!searchin/zaproxy-users/login/zaproxy-users/aDfultnXgM8/B7KRcg0C7ZYJ
 https://github.com/zaproxy/zap-core-help/wiki/HelpUiDialogsSessionContexts
 https://github.com/zaproxy/zaproxy/wiki/FAQformauth
 
-explain user steps...
 
 Form-Based Authentication
 To configure this authentication method, you need to supply the login url, to which the login request is performed, 
@@ -118,13 +105,38 @@ Via the UI:
 
 http://zap/OTHER/core/other/htmlreport/
 
-# Sessions
-
-# Context
-# How to spider as a user VIA API
-# OAuth 2 session headers are not supported, but cookie based authentication is. Is it right that we store auth in the
+setup
+Sessions
+scan with script
+via context as user 
+> Sessions - big files
+ > open/persist
+> OAuth 2 session headers are not supported, but cookie based authentication is. Is it right that we store auth in the
 cookie and therefore it's authenticated?
 
-Zest script to authenticate - how to run?
+Zest script to authenticate - macro
+
+# Http Sessions tab
+# Context
+# How to spider as a user VIA API
 
 
+
+
+
+
+
+https://groups.google.com/forum/#!searchin/zaproxy-develop/zap.context/zaproxy-develop/EKabLzlcGdQ/xi7XACi6CQAJ
+auth^^^
+
+https://janitha000.wordpress.com/2015/09/12/owasp-zap-authentication-and-command-line-tool/
+1.Include in the context (context/includeContext)
+2.Change Authentication Method to formBased. (authentication/setAutenticationMethod) Here I only pass contextID,authMethodName and in authMethodConfigParams only the logiunUrl. Not the loginrequestData. I tried to pass authMethodConfigParams as
+loginUrl=**********************&loginRequestData=username={%username%}&password={%password%}
+but the field doen't fills up when I use this.
+3.Set the login Indicator (authentication/setLoggedInIndicator)
+4.Enable auto Reauthentication (auth/autoReauthON)
+5.Add a new user (users/nweUser)
+6.Set credentials for user ( users/setAuthenticationCredentials)
+7.Enable user (users/setUserEnabled)
+8.Spider as the new user (spider/scanAsUser)
