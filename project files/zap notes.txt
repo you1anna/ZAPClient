@@ -114,15 +114,6 @@ via context as user
 > OAuth 2 session headers are not supported, but cookie based authentication is. Is it right that we store auth in the
 cookie and therefore it's authenticated?
 
-Zest script to authenticate - macro
-
-# Http Sessions tab
-# Context
-# How to spider as a user VIA API
-
-
-
-
 
 
 
@@ -140,3 +131,62 @@ but the field doen't fills up when I use this.
 6.Set credentials for user ( users/setAuthenticationCredentials)
 7.Enable user (users/setUserEnabled)
 8.Spider as the new user (spider/scanAsUser)
+--
+
+
+The "scan_as_user" (spider and ascan) expects the ID of the context and 
+the user not its names. 
+The IDs are returned when the context and user are created (it can also 
+be obtained after creation though). 
+
+
+
+PYTHON FORMAT Context :
+zap.context.import_context('/home/ilmbuild/.ZAP_D/contexts/DA64ZAP.context', 
+apikey = 'ApiKey123')
+
+
+
+ZEST
+Zest script to authenticate - macro
+
+Use Zest, it should be ideal for this scenario :)
+In the ZAP GUI click on the "Record a new Zest script..." button on the main toolbar (the cassette recorder).
+Select type: Authentication
+Follow the login sequence in your browser proxying through ZAP
+Click on the above button to stop recording the script
+You should now have an authentication script in the scripts tab.
+
+Remove any requests that arent actually required.
+
+Try running it - does it work?
+
+If it doesnt, debug time ;)
+
+If it does then add "Password" and "Username" parameters to the script (if they arent added by default?) then use those parameters wherever you used the actuall username and password (right click to paste in Zest variables)
+
+You should then be able to use this as an authentication script.
+
+---
+
+
+
+Write up confluence
+- install 
+-- dependencies 
+- pip install venv with python2
+- api settings
+- python commands as manual login...
+- ZEST login
+
+types of data 
+
+
+
+
+
+
+
+
+
+
