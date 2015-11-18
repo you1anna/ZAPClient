@@ -1,0 +1,192 @@
+
+ZAP
+
+C:\Users\robin.miklinski\OWASP ZAP\config.xml
+- disable API key 
+- other check boxes
+--
+
+Python client API
+
+The Python client can be downloaded from PyPI (download link in The ZAP API page) or it can be installed using:
+pip install python-owasp-zap-v2.4
+
+Building
+
+In order to change/develop ZAP Python API, we need to change the actual code in python/api/src/zapv2/ directory and then run the following commands to build that code and install it system-wide:
+cd python/api/
+python setup.py build
+sudo python setup.py install
+
+Disable zpi key / other settings in API settings on the UI
+
+
+C:\dev\Huddle\New folder\python-owasp-zap-v2.4-0.0.5\src\zapv2
+
+scan value
+'http://zap/JSON/spider/action/scan/?url=https%3A%2F%2Fwww.google.co.uk%2F&apikey='
+
+--
+
+PARELLELS Path config
+C:\Program Files\Parallels\Parallels Tools\Applications;C:\ProgramData\Oracle\Java\javapath;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\Windows Kits\8.1\Windows Performance Toolkit\;C:\Python34;C:\Python34\Scripts;C:\Program Files\Microsoft SDKs\TypeScript\1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;%systemroot%\System32\WindowsPowerShell\v1.0\;%systemroot%\System32\WindowsPowerShell\v1.0\;C:\UnixUtils
+
+C:\Program Files\Parallels\Parallels Tools\Applications;C:\ProgramData\Oracle\Java\javapath;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\Windows Kits\8.1\Windows Performance Toolkit\;C:\Python34;C:\Python34\Scripts;C:\Program Files\Microsoft SDKs\TypeScript\1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;%systemroot%\System32\WindowsPowerShell\v1.0\;%systemroot%\System32\WindowsPowerShell\v1.0\;C:\UnixUtils;C:\Python27;C:\Python27\Scripts
+
+Set both python dirs and renamed python to python3 
+
+python -> runs 2.7
+python3 -> runs 3.4
+
+--
+View -> show all tabs
+
+--
+
+LOG FILE
+C:\Users\miklinski\OWASP ZAP
+Add 
+log4j.logger.org.zaproxy.zap.extension.api=debug
+
+to log4j.properties
+-> watch logs all the time
+--
+
+zap.spider.status
+zap.spider.status()
+zap.spider.status.get('status')
+--
+
+**Support**
+https://groups.google.com/forum/#!forum/zaproxy-users
+
+Asking the API for the scanner status using the url /JSON/ascan/view/status/?zapapiformat=JSON.
+zap.spider.status is a property NOT A METHOD
+
+
+## Authentication ##
+
+https://github.com/zaproxy/zap-core-help/wiki/HelpStartConceptsAuthentication
+https://vimeo.com/101953742
+https://groups.google.com/forum/#!searchin/zaproxy-users/login/zaproxy-users/aDfultnXgM8/B7KRcg0C7ZYJ
+https://github.com/zaproxy/zap-core-help/wiki/HelpUiDialogsSessionContexts
+https://github.com/zaproxy/zaproxy/wiki/FAQformauth
+
+
+Form-Based Authentication
+To configure this authentication method, you need to supply the login url, to which the login request is performed, 
+the request body (POST data), if needed, and identify the parameters used to supply the 
+'username' and 'password'. If no request body is supplied, the login request is performed as a HTTP GET, 
+otherwise an HTTP POST is used. The credentials themselves are configured in the Users tab. Read more...
+
+
+EXCLUDE logoff link from spider otherwise it will click it and logout
+
+Via the UI:
+
+    Explore your app while proxying through ZAP
+    Login using a valid username and password
+    Define a Context, eg by right clicking the top node of your app in the Sites tab and selecting "Include in Context"
+    Find the 'Login request' in the Sites or History tab
+    Right click it and select "Flag as Context" / " Form-based Auth Login request"
+    Check that the Username and Password parameters are set correctly - they almost certainly wont be!
+    Find a string in a response which can be used to determine if the user is logged in or not
+    Highlight this string, right click and select "Flag as Context" / " Logged in/out Indicator" as relevant - you only need to set one of these, not both
+    Double click on the relevant Context node and navigate to the "Users" page - check the user details are correct, add any other users you want to use and enable them all
+    Navigate to the Context "Forced User" page and make sure the user you want to test is selected
+    The "Forced User Mode disabled - click to enable" button should now be enabled
+    Pressing this button in will cause ZAP to resend the authentication request whenever it detects that the user is no longer logged in, ie by using the 'logged in' or 'logged out' indicator.
+
+	api cals to scan as user
+	https://groups.google.com/forum/#!searchin/zaproxy-users/setauthentication/zaproxy-users/BrVE0Zp_ug4/QNSoMXcVg2YJ
+
+
+# migrate to tests
+
+http://zap/OTHER/core/other/htmlreport/
+
+setup
+Sessions
+scan with script
+via context as user 
+> Sessions - big files
+ > open/persist
+> OAuth 2 session headers are not supported, but cookie based authentication is. Is it right that we store auth in the
+cookie and therefore it's authenticated?
+
+
+
+
+https://groups.google.com/forum/#!searchin/zaproxy-develop/zap.context/zaproxy-develop/EKabLzlcGdQ/xi7XACi6CQAJ
+auth^^^
+
+https://janitha000.wordpress.com/2015/09/12/owasp-zap-authentication-and-command-line-tool/
+1.Include in the context (context/includeContext)
+2.Change Authentication Method to formBased. (authentication/setAutenticationMethod) Here I only pass contextID,authMethodName and in authMethodConfigParams only the logiunUrl. Not the loginrequestData. I tried to pass authMethodConfigParams as
+loginUrl=**********************&loginRequestData=username={%username%}&password={%password%}
+but the field doen't fills up when I use this.
+3.Set the login Indicator (authentication/setLoggedInIndicator)
+4.Enable auto Reauthentication (auth/autoReauthON)
+5.Add a new user (users/nweUser)
+6.Set credentials for user ( users/setAuthenticationCredentials)
+7.Enable user (users/setUserEnabled)
+8.Spider as the new user (spider/scanAsUser)
+--
+
+
+The "scan_as_user" (spider and ascan) expects the ID of the context and 
+the user not its names. 
+The IDs are returned when the context and user are created (it can also 
+be obtained after creation though). 
+
+
+
+PYTHON FORMAT Context :
+zap.context.import_context('/home/ilmbuild/.ZAP_D/contexts/DA64ZAP.context', 
+apikey = 'ApiKey123')
+
+
+
+ZEST
+Zest script to authenticate - macro
+
+Use Zest, it should be ideal for this scenario :)
+In the ZAP GUI click on the "Record a new Zest script..." button on the main toolbar (the cassette recorder).
+Select type: Authentication
+Follow the login sequence in your browser proxying through ZAP
+Click on the above button to stop recording the script
+You should now have an authentication script in the scripts tab.
+
+Remove any requests that arent actually required.
+
+Try running it - does it work?
+
+If it doesnt, debug time ;)
+
+If it does then add "Password" and "Username" parameters to the script (if they arent added by default?) then use those parameters wherever you used the actuall username and password (right click to paste in Zest variables)
+
+You should then be able to use this as an authentication script.
+
+---
+
+
+
+Write up confluence
+- install 
+-- dependencies 
+- pip install venv with python2
+- api settings
+- python commands as manual login...
+- ZEST login
+
+types of data 
+
+
+
+
+
+
+
+
+
+
