@@ -19,7 +19,7 @@ HIGH = "HIGH"
 
 zap = ZAPv2(proxies={'http': 'http://127.0.0.1:8080', 'https': 'http://127.0.0.1:8080'})
 
-#subprocess.Popen(['/path/to/zap.sh', '-daemon'], stdout=open(os.devnull, 'w'))
+#subprocess.Popen(['/path/to/zap.bat', '-daemon'], stdout=open(os.devnull, 'w'))
 
 contextId = zap.context.import_context('HuddleContext2.context')
 zap.context.set_context_in_scope('HuddleContext2', True)
@@ -38,18 +38,22 @@ driver = webdriver.Firefox(firefox_profile=profile)
 
 driver.get(loginUrl)
 driver.implicitly_wait(5)
-if driver.find_element_by_css_selector('[data-automation="continue-button"]').is_displayed():
+continueButton = driver.find_element_by_css_selector('[data-automation="continue-button"]')
+if continueButton.is_displayed():
     driver.find_element_by_css_selector('[data-automation="email-field"]').clear()
     driver.find_element_by_css_selector('[data-automation="email-field"]').send_keys("Robin.wmgr1")
-    driver.find_element_by_css_selector('[data-automation="continue-button]').click()
+    continueButton.click()
 driver.implicitly_wait(3)
 driver.find_element_by_id("passwordField").clear()
 driver.find_element_by_id("passwordField").send_keys("Steria12345$")
+driver.implicitly_wait(8)
 
 zap.urlopen(loginUrl)
 print('Spidering target %s' % loginUrl)
 zap.spider.scan(loginUrl)
 time.sleep(2)
+
+zap.httpsessions.active_session()
 
 try:
     while int(zap.spider.status()) < 100:
