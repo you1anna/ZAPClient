@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os
 import time
 import subprocess
 from pprint import pprint
@@ -10,6 +11,8 @@ loginUrl = 'https://login.huddle.dev/'
 myHuddleUrl = 'https://my.huddle.dev/'
 apiHuddleUrl = 'https://api.huddle.dev/'
 userId = 'Robin.Wmgr1'
+root = 'D:\dev\Huddle-ZAPClient'
+contextFile = 'Contexts\HuddleContext_dev_staging.context'
 # workspaceUrl
 
 ZAP_PROXY_HOST = '127.0.0.1'
@@ -17,11 +20,14 @@ ZAP_PROXY_PORT = 8080
 MEDIUM = "MEDIUM"
 HIGH = "HIGH"
 
+contextFilePath = os.path.join(root, contextFile)
+pprint(contextFilePath)
+
 zap = ZAPv2(proxies={'http': 'http://127.0.0.1:8080', 'https': 'http://127.0.0.1:8080'})
 
 #subprocess.Popen(['/path/to/zap.bat', '-daemon'], stdout=open(os.devnull, 'w'))
 
-contextId = zap.context.import_context('HuddleContext2.context')
+contextId = zap.context.import_context(contextFilePath)
 zap.context.set_context_in_scope('HuddleContext2', True)
 print "contextID: " + contextId
 
