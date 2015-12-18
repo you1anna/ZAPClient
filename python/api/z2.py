@@ -11,14 +11,10 @@ time.sleep(10)
 
 zap = ZAPv2()
 
-# Spider and scan...
-
 print 'Session will be saved to: %s' % zap.core.home_directory
 
 zap.core.save_session('Session Name')
 
-# or if you want to save to other directory than "home directory"
-zap.core.save_session('/path/to/dir/Session Name')
+zap.core.save_session('/path/to/dir/HuddleSession')
 
-# Shutdown ZAP
 zap.core.shutdown

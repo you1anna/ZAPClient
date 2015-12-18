@@ -1,1 +1,9 @@
-.idea/workspace.xml
+Sessions
+env/
+python/api/zapscanner.py
+login.html
+login_python.py
+python/api/new.py
+python/api/test_zap.py
+python/api/z_test.py
+python/api/zapcmd.py
