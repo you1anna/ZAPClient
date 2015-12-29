@@ -2,61 +2,47 @@
 
 import os
 import time
-import subprocess
+import navigation
+from config import Settings
 from pprint import pprint
 from zapv2 import ZAPv2, ZapError
-from selenium import webdriver
-
-loginUrl = 'https://login.huddle.dev/'
-myHuddleUrl = 'https://my.huddle.dev/'
-apiHuddleUrl = 'https://api.huddle.dev/'
-userId = 'Robin.Wmgr1'
-root = 'D:\dev\Huddle-ZAPClient'
-contextFile = 'Contexts\HuddleContext_dev_staging.context'
-# workspaceUrl
 
 ZAP_PROXY_HOST = '127.0.0.1'
 ZAP_PROXY_PORT = 8080
 MEDIUM = "MEDIUM"
 HIGH = "HIGH"
 
+disk = Settings['disk']
+userId = Settings['userid']
+loginUrl = Settings['loginUri']
+myHuddleUri = Settings['myHuddleUri']
+
+root = disk + ":\dev\Huddle\Huddle-ZAPClient"
+contextFile = "Contexts\\" + Settings['contextFileName']
 contextFilePath = os.path.join(root, contextFile)
-pprint(contextFilePath)
 
 zap = ZAPv2(proxies={'http': 'http://127.0.0.1:8080', 'https': 'http://127.0.0.1:8080'})
 
-#subprocess.Popen(['/path/to/zap.bat', '-daemon'], stdout=open(os.devnull, 'w'))
-
 contextId = zap.context.import_context(contextFilePath)
-zap.context.set_context_in_scope('HuddleContext2', True)
+zap.context.set_context_in_scope(Settings['contextFileName'], True)
 print "contextID: " + contextId
 
-profile = webdriver.FirefoxProfile()
-profile.set_preference("network.proxy.type", 1)
-profile.set_preference("network.proxy.http", ZAP_PROXY_HOST)
-profile.set_preference("network.proxy.http_port", ZAP_PROXY_PORT)
-profile.update_preferences()
 
-driver = webdriver.Firefox(firefox_profile=profile)
+# NEXT >>>>>>>>>>>>>>>
+zap.spider.exclude_from_scan(".*\/leave.*")
+zap.spider.exclude_from_scan(".*logout.*")
+zap.spider.exclude_from_scan(".*/leave.*")
+#zap.httpsessions.active_session()
+zap.spider.set_option_max_depth(5)
 
-# you have to use remote, otherwise you'll have to code it yourself in python to
-# driver = webdriver.Remote("http://localhost:4444/wd/hub", webdriver.DesiredCapabilities.FIREFOX)
-
-driver.get(loginUrl)
-driver.implicitly_wait(5)
-continueButton = driver.find_element_by_css_selector('[data-automation="continue-button"]')
-if continueButton.is_displayed():
-    driver.find_element_by_css_selector('[data-automation="email-field"]').clear()
-    driver.find_element_by_css_selector('[data-automation="email-field"]').send_keys("Robin.wmgr1")
-    continueButton.click()
-driver.implicitly_wait(3)
-driver.find_element_by_id("passwordField").clear()
-driver.find_element_by_id("passwordField").send_keys("Steria12345$")
-driver.implicitly_wait(8)
+fftest = navigation.SeleniumTests()
+fftest.setup()
+profile = fftest.setupprofile(Settings['ZAP_PROXY_HOST'], Settings['ZAP_PROXY_PORT'])
+fftest.login(myHuddleUri, profile)
 
 zap.urlopen(loginUrl)
 print('Spidering target %s' % loginUrl)
-zap.spider.scan(loginUrl)
+zap.spider.scan_as_user(loginUrl, userid=3, contextName=Settings['contextName'])
 time.sleep(2)
 
 zap.httpsessions.active_session()

@@ -3,10 +3,10 @@
 import time
 from pprint import pprint
 from zapv2 import ZAPv2
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
+from navigation import webdriver
+from navigation.webdriver.common.by import By
+from navigation.webdriver.common.keys import Keys
+from navigation.webdriver.support.ui import Select
 
 target = 'https://connect.telenordigital.com/gui/mypage'
 zap = ZAPv2(proxies={'http': 'http://127.0.0.1:8090', 'https': 'http://127.0.0.1:8090'})
