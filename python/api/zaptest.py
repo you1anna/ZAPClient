@@ -17,7 +17,7 @@ userId = Settings['userid']
 loginUrl = Settings['loginUri']
 myHuddleUri = Settings['myHuddleUri']
 
-root = disk + ":\dev\Huddle\Huddle-ZAPClient"
+root = disk + ":\dev\Huddle-ZAPClient"
 contextFile = "Contexts\\" + Settings['contextFileName']
 contextFilePath = os.path.join(root, contextFile)
 
@@ -36,13 +36,14 @@ zap.spider.exclude_from_scan(".*/leave.*")
 zap.spider.set_option_max_depth(5)
 
 fftest = navigation.SeleniumTests()
-fftest.setup()
-profile = fftest.setupprofile(Settings['ZAP_PROXY_HOST'], Settings['ZAP_PROXY_PORT'])
-fftest.login(myHuddleUri, profile)
+profile = fftest.setupprofile()
+fftest.login(loginUrl, profile)
 
-zap.urlopen(loginUrl)
-print('Spidering target %s' % loginUrl)
-zap.spider.scan_as_user(loginUrl, userid=3, contextName=Settings['contextName'])
+zap.urlopen(myHuddleUri)
+print('Spidering target %s' % myHuddleUri)
+CID = int(contextId)
+print(CID)
+zap.spider.scan_as_user(loginUrl, userid=3, contextId=CID)
 time.sleep(2)
 
 zap.httpsessions.active_session()
