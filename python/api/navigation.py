@@ -13,6 +13,8 @@ class SeleniumTests:
 		profile.set_preference("network.proxy.type", 1)
 		profile.set_preference("network.proxy.http", Settings['ZAP_PROXY_HOST'])
 		profile.set_preference('network.proxy.http_port', Settings['ZAP_PROXY_PORT'])
+		profile.set_preference("network.proxy.ssl", Settings['ZAP_PROXY_HOST'])
+		profile.set_preference('network.proxy.ssl_port', Settings['ZAP_PROXY_PORT'])
 		profile.update_preferences()
 		return profile
 

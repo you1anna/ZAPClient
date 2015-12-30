@@ -7,8 +7,6 @@ from config import Settings
 from pprint import pprint
 from zapv2 import ZAPv2, ZapError
 
-ZAP_PROXY_HOST = '127.0.0.1'
-ZAP_PROXY_PORT = 8080
 MEDIUM = "MEDIUM"
 HIGH = "HIGH"
 
