@@ -2,7 +2,7 @@
 
 import os
 import time
-import navigation
+import zapSelenium
 from config import Settings
 from pprint import pprint
 from zapv2 import ZAPv2, ZapError
@@ -11,7 +11,8 @@ MEDIUM = "MEDIUM"
 HIGH = "HIGH"
 
 disk = Settings['disk']
-userId = Settings['userid']
+username = Settings['username']
+userid = Settings['userid']
 loginUrl = Settings['loginUri']
 myHuddleUri = Settings['myHuddleUri']
 
@@ -30,18 +31,18 @@ print "contextID: " + contextId
 zap.spider.exclude_from_scan(".*\/leave.*")
 zap.spider.exclude_from_scan(".*logout.*")
 zap.spider.exclude_from_scan(".*/leave.*")
+zap.authentication.set_logged_in_indicator(contextId, '\\Qlogout.aspx\E')
 #zap.httpsessions.active_session()
-zap.spider.set_option_max_depth(5)
+#zap.spider.set_option_max_depth(5)
 
-fftest = navigation.SeleniumTests()
+fftest = zapSelenium.SeleniumTests()
 profile = fftest.setupprofile()
-fftest.login(loginUrl, profile)
+dash = fftest.login(loginUrl, profile)
+dash.
 
 zap.urlopen(myHuddleUri)
 print('Spidering target %s' % myHuddleUri)
-CID = int(contextId)
-print(CID)
-zap.spider.scan_as_user(loginUrl, userid=3, contextId=CID)
+zap.spider.scan_as_user(loginUrl, userid=userid, contextId=contextId)
 time.sleep(2)
 
 zap.httpsessions.active_session()
