@@ -36,9 +36,10 @@ zap.authentication.set_logged_in_indicator(contextId, '\\Qlogout.aspx\E')
 #zap.spider.set_option_max_depth(5)
 
 fftest = zapSelenium.SeleniumTests()
+fftest.test_test1()
 profile = fftest.setupprofile()
-dash = fftest.login(loginUrl, profile)
-dash.
+dashboardpage = fftest.login(loginUrl, profile)
+
 
 zap.urlopen(myHuddleUri)
 print('Spidering target %s' % myHuddleUri)

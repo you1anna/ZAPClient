@@ -1,7 +1,6 @@
 from __future__ import absolute_import
-from ..abstractpageclasses.abstractPage import AbstractPage
-from ...pageobject.globalHeader import GlobalHeader
-from ...pageobject.abstractpageclasses.webComponent import WebComponent
+from huddleframework.pageobject.abstractpageclasses.abstractPage import AbstractPage
+from huddleframework.pageobject.abstractpageclasses.webComponent import WebComponent
 from selenium.webdriver.common.by import By
 
 
@@ -18,6 +17,7 @@ class HuddleBasePage(AbstractPage):
 	def __init__(self, driver, url, has_global_header=True):
 		super(HuddleBasePage, self).__init__(driver, url)
 		if has_global_header:
+			from huddleframework.pageobject.globalHeader import GlobalHeader
 			self.globalHeader = GlobalHeader(driver)
 
 		self.logger.debug(u"Initialised - " + self.__class__.__name__)

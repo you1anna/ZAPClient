@@ -1,18 +1,27 @@
 from pprint import pprint
 from selenium import webdriver
-from baseTestCase import BaseTestCase
+#from baseTestCase import BaseTestCase
 from huddleBasePage import HuddleBasePage
 from dashboardPage import DashboardPage
-import selenium.webdriver.support.ui as ui
+from baseUnitTestCase import BaseUnitTestCase
 from config import Settings
 
 
-class SeleniumTests(BaseTestCase):
-	def __init__(self):
-		BaseTestCase.__init__(self)
+class SeleniumTests(BaseUnitTestCase):
+	def __init__(self, *args, **kwargs):
+		super(BaseUnitTestCase, self).__init__(*args, **kwargs)
 		self.userid = Settings['userid']
 		self.username = Settings['username']
 		self.myHuddleUri = Settings['myHuddleUri']
+
+	def test_test1(self):
+		profile = self.setupprofile()
+		dashboardpage = self.login(Settings['loginUri'], profile)
+		self.driver.implicitly_wait(20)
+		dashboardpage.globalHeader.\
+			click_profile_dropdown()
+		pass
+
 
 	def setupprofile(self):
 		profile = webdriver.FirefoxProfile()

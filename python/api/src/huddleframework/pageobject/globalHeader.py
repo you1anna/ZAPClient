@@ -1,9 +1,7 @@
 from __future__ import absolute_import
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions
-from ..pageobject.abstractpageclasses.webComponent import WebComponent
-from .signOutPage import SignOutPage
+from huddleframework.pageobject.abstractpageclasses.webComponent import WebComponent
+from huddleframework.pageobject.signOutPage import SignOutPage
 
 
 class GlobalHeader(WebComponent):
@@ -37,6 +35,7 @@ class GlobalHeader(WebComponent):
 	def click_on_workspace_picker(self):
 		self.click(self.WORKSPACE_PICKER)
 		return WorkspaceDowndropMenu(self.driver)
+
 
 class ProfileDropdownMenu(WebComponent):
 
