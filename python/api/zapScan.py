@@ -2,6 +2,7 @@
 
 import os
 import time
+import subprocess
 import zapSelenium
 from config import Settings
 from pprint import pprint
@@ -20,25 +21,30 @@ root = disk + ":\dev\Huddle-ZAPClient"
 contextFile = "Contexts\\" + Settings['contextFileName']
 contextFilePath = os.path.join(root, contextFile)
 
+# print 'Starting ZAP ...'
+# subprocess.Popen(['C:\Program Files (x86)\OWASP\Zed Attack Proxy\zap.bat','-daemon'],stdout=open(os.devnull,'w'))
+# print 'Waiting for ZAP to load, 10 seconds ...'
+# time.sleep(10)
+
 zap = ZAPv2(proxies={'http': 'http://127.0.0.1:8080', 'https': 'http://127.0.0.1:8080'})
 
 contextId = zap.context.import_context(contextFilePath)
 zap.context.set_context_in_scope(Settings['contextFileName'], True)
 print "contextID: " + contextId
 
-
-# NEXT >>>>>>>>>>>>>>>
 zap.spider.exclude_from_scan(".*\/leave.*")
 zap.spider.exclude_from_scan(".*logout.*")
 zap.spider.exclude_from_scan(".*/leave.*")
+
 zap.authentication.set_logged_in_indicator(contextId, '\\Qlogout.aspx\E')
 #zap.httpsessions.active_session()
 #zap.spider.set_option_max_depth(5)
 
-fftest = zapSelenium.SeleniumTests()
-fftest.test_test1()
-profile = fftest.setupprofile()
-dashboardpage = fftest.login(loginUrl, profile)
+# Map Huddle in Zap
+mapDashboardPage = zapSelenium.SeleniumTests()
+mapDashboardPage.test_loginHuddle()
+profile = mapDashboardPage.setupprofile()
+dashboardpage = mapDashboardPage.login(loginUrl, profile)
 
 
 zap.urlopen(myHuddleUri)

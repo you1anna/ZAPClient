@@ -5,12 +5,6 @@ from selenium.webdriver.common.by import By
 
 
 class HuddleBasePage(AbstractPage):
-	u"""
-	This is the generic base huddle page of any page object - inherit WebElement which support shortcut to finding objects etc
-	:param	driver: browser driver e.g. firefox, chrome etc
-	:param	url: page url e.g. https://my.huddle.dev/createaccount.aspx
-	:param	has_gloabl_header: default=True; with exception to public pages
-	"""
 	globalHeader = None
 	WELCOME_DIALOG_DISMISS_BUTTON = (By.CSS_SELECTOR, u"[data-automation='slideshow-dismiss-button']")
 

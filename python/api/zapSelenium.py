@@ -1,7 +1,4 @@
-from pprint import pprint
 from selenium import webdriver
-#from baseTestCase import BaseTestCase
-from huddleBasePage import HuddleBasePage
 from dashboardPage import DashboardPage
 from baseUnitTestCase import BaseUnitTestCase
 from config import Settings
@@ -13,15 +10,7 @@ class SeleniumTests(BaseUnitTestCase):
 		self.userid = Settings['userid']
 		self.username = Settings['username']
 		self.myHuddleUri = Settings['myHuddleUri']
-
-	def test_test1(self):
-		profile = self.setupprofile()
-		dashboardpage = self.login(Settings['loginUri'], profile)
-		self.driver.implicitly_wait(20)
-		dashboardpage.globalHeader.\
-			click_profile_dropdown()
-		pass
-
+		self.loginUri = Settings['loginUri']
 
 	def setupprofile(self):
 		profile = webdriver.FirefoxProfile()
@@ -32,6 +21,13 @@ class SeleniumTests(BaseUnitTestCase):
 		profile.set_preference('network.proxy.ssl_port', Settings['ZAP_PROXY_PORT'])
 		profile.update_preferences()
 		return profile
+
+	def test_loginHuddle(self):
+		self.profile = self.setupprofile()
+		self.dashboardpage = self.login(self.loginUri, self.profile)
+		self.dashboardpage.globalHeader.click_profile_dropdown()
+		self.driver.implicitly_wait(20)
+		pass
 
 	def login(self, url, profile):
 		self.driver = webdriver.Firefox(firefox_profile=profile)
@@ -49,7 +45,6 @@ class SeleniumTests(BaseUnitTestCase):
 			self.continuebutton.click()
 			self.driver.implicitly_wait(8)
 		return DashboardPage(self.driver)
-
 
 	# next
 	# dashboardpage = driver.get(self.myHuddleUri)

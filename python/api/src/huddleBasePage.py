@@ -3,6 +3,7 @@ from webComponent import WebComponent
 from selenium.webdriver.common.by import By
 from huddleframework.pageobject.globalHeader import GlobalHeader
 
+
 class HuddleBasePage(AbstractPage):
 	globalHeader = None
 	WELCOME_DIALOG_DISMISS_BUTTON = (By.CSS_SELECTOR, "[data-automation='slideshow-dismiss-button']")
@@ -10,6 +11,7 @@ class HuddleBasePage(AbstractPage):
 	def __init__(self, driver, url, has_global_header=True):
 		super(HuddleBasePage, self).__init__(driver, url)
 		if has_global_header:
+			from huddleframework.pageobject.globalHeader import GlobalHeader
 			self.globalHeader = GlobalHeader(driver)
 
 		self.logger.debug("Initialised - " + self.__class__.__name__)
