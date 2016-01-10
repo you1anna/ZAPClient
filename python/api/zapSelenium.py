@@ -1,7 +1,7 @@
 from selenium import webdriver
-from dashboardPage import DashboardPage
-from baseUnitTestCase import BaseUnitTestCase
 from config import Settings
+from huddleframework.pageobject.dashboardPage import DashboardPage
+from baseUnitTestCase import BaseUnitTestCase
 
 
 class SeleniumTests(BaseUnitTestCase):
@@ -9,8 +9,8 @@ class SeleniumTests(BaseUnitTestCase):
 		super(BaseUnitTestCase, self).__init__(*args, **kwargs)
 		self.userid = Settings['userid']
 		self.username = Settings['username']
-		self.myHuddleUri = Settings['myHuddleUri']
 		self.loginUri = Settings['loginUri']
+		self.myHuddleUri = Settings['myHuddleUri']
 
 	def setupprofile(self):
 		profile = webdriver.FirefoxProfile()
@@ -19,6 +19,8 @@ class SeleniumTests(BaseUnitTestCase):
 		profile.set_preference('network.proxy.http_port', Settings['ZAP_PROXY_PORT'])
 		profile.set_preference("network.proxy.ssl", Settings['ZAP_PROXY_HOST'])
 		profile.set_preference('network.proxy.ssl_port', Settings['ZAP_PROXY_PORT'])
+		profile.set_preference("webdriver_assume_untrusted_issuer", False)
+		profile.set_preference("accept_untrusted_certs", True)
 		profile.update_preferences()
 		return profile
 
@@ -26,7 +28,7 @@ class SeleniumTests(BaseUnitTestCase):
 		self.profile = self.setupprofile()
 		self.dashboardpage = self.login(self.loginUri, self.profile)
 		self.dashboardpage.globalHeader.click_profile_dropdown()
-		self.driver.implicitly_wait(20)
+		self.driver.implicitly_wait(5)
 		pass
 
 	def login(self, url, profile):
@@ -34,16 +36,19 @@ class SeleniumTests(BaseUnitTestCase):
 		self.driver.get(url)
 		self.driver.implicitly_wait(5)
 		self.continuebutton = self.driver.find_element_by_css_selector('[data-automation="continue-button"]')
-		if self.continuebutton.is_displayed():
-			self.driver.find_element_by_css_selector('[data-automation="email-field"]').clear()
-			self.driver.find_element_by_css_selector('[data-automation="email-field"]').send_keys(Settings['username'])
-			self.continuebutton.click()
-			self.driver.implicitly_wait(3)
-			self.driver.find_element_by_id("passwordField").clear()
-			self.driver.find_element_by_id("passwordField").send_keys(Settings['password'])
-			self.driver.implicitly_wait(4)
-			self.continuebutton.click()
-			self.driver.implicitly_wait(8)
+		try:
+			if self.continuebutton.is_displayed():
+				self.driver.find_element_by_css_selector('[data-automation="email-field"]').clear()
+				self.driver.find_element_by_css_selector('[data-automation="email-field"]').send_keys(Settings['username'])
+				self.continuebutton.click()
+				self.driver.implicitly_wait(3)
+				self.driver.find_element_by_id("passwordField").clear()
+				self.driver.find_element_by_id("passwordField").send_keys(Settings['password'])
+				self.driver.implicitly_wait(4)
+				self.continuebutton.click()
+				self.driver.implicitly_wait(8)
+		except Exception:
+			print(Exception.message)
 		return DashboardPage(self.driver)
 
 	# next

@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 from selenium.webdriver.common.by import By
 from huddleframework.pageobject.abstractpageclasses.huddleBasePage import HuddleBasePage
-from dashboardPage import DashboardPage
+from huddleframework.pageobject.dashboardPage import DashboardPage
 
 
 class LoginPage(HuddleBasePage):

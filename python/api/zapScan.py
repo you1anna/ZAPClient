@@ -22,7 +22,7 @@ contextFile = "Contexts\\" + Settings['contextFileName']
 contextFilePath = os.path.join(root, contextFile)
 
 # print 'Starting ZAP ...'
-# subprocess.Popen(['C:\Program Files (x86)\OWASP\Zed Attack Proxy\zap.bat','-daemon'],stdout=open(os.devnull,'w'))
+#subprocess.Popen('C:\Program Files\OWASP\Zed Attack Proxy\zap.bat', creationflags=subprocess.CREATE_NEW_CONSOLE)
 # print 'Waiting for ZAP to load, 10 seconds ...'
 # time.sleep(10)
 
@@ -43,8 +43,6 @@ zap.authentication.set_logged_in_indicator(contextId, '\\Qlogout.aspx\E')
 # Map Huddle in Zap
 mapDashboardPage = zapSelenium.SeleniumTests()
 mapDashboardPage.test_loginHuddle()
-profile = mapDashboardPage.setupprofile()
-dashboardpage = mapDashboardPage.login(loginUrl, profile)
 
 
 zap.urlopen(myHuddleUri)

@@ -1,7 +1,7 @@
-from config import Settings
-from selenium import webdriver
 import unittest
-from loginPage import LoginPage
+from selenium import webdriver
+from config import Settings
+from huddleframework.pageobject.loginPage import LoginPage
 
 
 # logging.config.dictConfig(LoggingConfig)

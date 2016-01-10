@@ -1,5 +1,5 @@
 Settings = dict(
-		disk='D',
+		disk='C',
 		loginUri='https://login.huddle.test/',
 		myHuddleUri='https://my.huddle.test/',
 		contextName='HuddleContext_dev_staging',
