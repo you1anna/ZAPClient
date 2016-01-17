@@ -28,6 +28,7 @@ class SeleniumTests(BaseUnitTestCase):
 		self.profile = self.setupprofile()
 		self.dashboardpage = self.login(self.loginUri, self.profile)
 		self.dashboardpage.globalHeader.click_profile_dropdown()
+		self.dashboardpage.globalHeader.click_on_workspace_picker()
 		self.driver.implicitly_wait(5)
 		pass
 

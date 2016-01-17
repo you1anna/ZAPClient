@@ -21,8 +21,13 @@ root = disk + ":\dev\Huddle-ZAPClient"
 contextFile = "Contexts\\" + Settings['contextFileName']
 contextFilePath = os.path.join(root, contextFile)
 
-# print 'Starting ZAP ...'
-#subprocess.Popen('C:\Program Files\OWASP\Zed Attack Proxy\zap.bat', creationflags=subprocess.CREATE_NEW_CONSOLE)
+print 'Starting ZAP ...'
+print 'Zap path = ' + Settings['zapPath']
+
+zap_bat = ['start cmd /b zap.bat']
+#subprocess.Popen(zap_bat, cwd=Settings['zapPath'], stdout=subprocess.STDOUT, stderr=subprocess.PIPE, shell=True)
+#subprocess.Popen(['C:\Program Files\OWASP\Zed Attack Proxy\zap.bat', '-daemon'], stdout=open(os.devnull, 'w'))
+# subprocess.Popen(['/home/usman/ZAP_2.1.0/zap.sh','-daemon'],stdout=open(os.devnull,'w'))
 # print 'Waiting for ZAP to load, 10 seconds ...'
 # time.sleep(10)
 
@@ -32,10 +37,10 @@ contextId = zap.context.import_context(contextFilePath)
 zap.context.set_context_in_scope(Settings['contextFileName'], True)
 print "contextID: " + contextId
 
+#Client config
 zap.spider.exclude_from_scan(".*\/leave.*")
 zap.spider.exclude_from_scan(".*logout.*")
 zap.spider.exclude_from_scan(".*/leave.*")
-
 zap.authentication.set_logged_in_indicator(contextId, '\\Qlogout.aspx\E')
 #zap.httpsessions.active_session()
 #zap.spider.set_option_max_depth(5)
@@ -43,7 +48,6 @@ zap.authentication.set_logged_in_indicator(contextId, '\\Qlogout.aspx\E')
 # Map Huddle in Zap
 mapDashboardPage = zapSelenium.SeleniumTests()
 mapDashboardPage.test_loginHuddle()
-
 
 zap.urlopen(myHuddleUri)
 print('Spidering target %s' % myHuddleUri)
