@@ -1,6 +1,6 @@
 from selenium import webdriver
 from config import Settings
-from huddleframework.pageobject.dashboardPage import DashboardPage
+from src.huddleframework.pageobject.dashboardPage import DashboardPage
 from baseUnitTestCase import BaseUnitTestCase
 
 

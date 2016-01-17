@@ -14,3 +14,4 @@ python/api/ref/zapscanner.py
 python/api/ref/zapcmd.py
 python/api/ref/
 python/api/src/localmoved/
+localmoved/
