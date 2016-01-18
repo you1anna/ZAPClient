@@ -11,7 +11,7 @@ class HuddleBasePage(AbstractPage):
 	def __init__(self, driver, url, has_global_header=True):
 		super(HuddleBasePage, self).__init__(driver, url)
 		if has_global_header:
-			from src.huddleframework.pageobject.globalHeader import GlobalHeader
+			from ..globalHeader import GlobalHeader
 			self.globalHeader = GlobalHeader(driver)
 
 		self.logger.debug(u"Initialised - " + self.__class__.__name__)
@@ -35,6 +35,7 @@ class HuddleBasePage(AbstractPage):
 
 	def slideshow_component(self):
 		return SlideShowFrame.SLIDESHOW_COMPONENT
+
 
 class SlideShowFrame(WebComponent):
 	DISMISS_SLIDESHOW_BUTTON = (By.CSS_SELECTOR, u'[data-automation="slideshow-dismiss-button"]')

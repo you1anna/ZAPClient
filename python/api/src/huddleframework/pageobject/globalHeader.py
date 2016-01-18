@@ -1,7 +1,6 @@
-from __future__ import absolute_import
 from selenium.webdriver.common.by import By
-from huddleframework.pageobject.abstractpageclasses.webComponent import WebComponent
-from huddleframework.pageobject.signOutPage import SignOutPage
+from ..pageobject.abstractpageclasses.webComponent import WebComponent
+from ..pageobject.signOutPage import SignOutPage
 
 
 class GlobalHeader(WebComponent):

@@ -184,7 +184,9 @@ types of data
 
 
 
-
+# subprocess.Popen(zap_bat, cwd=Settings['zapPath'], stdout=subprocess.STDOUT, stderr=subprocess.PIPE, shell=True)
+# subprocess.Popen(['C:\Program Files\OWASP\Zed Attack Proxy\zap.bat', '-daemon'], stdout=open(os.devnull, 'w'))
+# subprocess.Popen(['/home/usman/ZAP_2.1.0/zap.sh','-daemon'],stdout=open(os.devnull,'w'))
 
 
 
