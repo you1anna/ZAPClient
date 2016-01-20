@@ -170,7 +170,7 @@ def build_import_pattern(mapping1, mapping2):
     """
     # py3k: urllib.request, py2k: ('urllib2', 'urllib')
     yield from_import.format(modules=all_modules_subpattern())
-    for py3k, py2k in mapping1.items():
+    for py3k, py2k in list(mapping1.items()):
         name, attr = py3k.split('.')
         s_name = simple_name.format(name=name)
         s_attr = simple_attr.format(attr=attr)
@@ -290,7 +290,7 @@ class FixImports2(fixer_base.BaseFix):
 
             # Parse the dict to create new import statements to replace this one
             imports = []
-            for new_pkg, names in packages.items():
+            for new_pkg, names in list(packages.items()):
                 if not names:
                     # Didn't import anything from that package, move along
                     continue

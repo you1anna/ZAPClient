@@ -2,7 +2,7 @@
 """
 Main program for 3to2.
 """
-from __future__ import print_function
+
 import sys
 import os
 import difflib

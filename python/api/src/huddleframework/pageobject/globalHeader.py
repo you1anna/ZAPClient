@@ -6,11 +6,11 @@ from ..pageobject.signOutPage import SignOutPage
 class GlobalHeader(WebComponent):
 
 	# locator
-	GLOBAL_HEADER = (By.CSS_SELECTOR, u"#header-content")
-	PROFILE_DROPDOWN_LINK = (By.CSS_SELECTOR, u"[data-automation='huddle-header-avatar-menu-link']")
-	DASHBOARD_LINK = (By.ID, u"dashboard-link")
-	HELP_LINK = (By.CSS_SELECTOR, u"[data-automation='help-link']")
-	WORKSPACE_PICKER = (By.CSS_SELECTOR, u"[data-automation='huddle-header-workspace-select']")
+	GLOBAL_HEADER = (By.CSS_SELECTOR, "#header-content")
+	PROFILE_DROPDOWN_LINK = (By.CSS_SELECTOR, "[data-automation='huddle-header-avatar-menu-link']")
+	DASHBOARD_LINK = (By.ID, "dashboard-link")
+	HELP_LINK = (By.CSS_SELECTOR, "[data-automation='help-link']")
+	WORKSPACE_PICKER = (By.CSS_SELECTOR, "[data-automation='huddle-header-workspace-select']")
 
 	def __init__(self, driver):
 		super(GlobalHeader, self).__init__(driver, self.GLOBAL_HEADER)
@@ -38,14 +38,14 @@ class GlobalHeader(WebComponent):
 
 class ProfileDropdownMenu(WebComponent):
 
-	MY_PROFILE_LINK = (By.CSS_SELECTOR, u"#header-profile-link")
-	ACCOUNT_SETTINGS_LINK = (By.CSS_SELECTOR, u"a:contains('Account settings')")
-	COMPANY_LINK = (By.CSS_SELECTOR, u"li.company-link a")
-	SIGNOUT_LINK = (By.CSS_SELECTOR, u"#logout-link")
-	REQUEST_NEW_ACCOUNT_LINK = (By.CSS_SELECTOR, u"a:contains('Request new account'')")
+	MY_PROFILE_LINK = (By.CSS_SELECTOR, "#header-profile-link")
+	ACCOUNT_SETTINGS_LINK = (By.CSS_SELECTOR, "a:contains('Account settings')")
+	COMPANY_LINK = (By.CSS_SELECTOR, "li.company-link a")
+	SIGNOUT_LINK = (By.CSS_SELECTOR, "#logout-link")
+	REQUEST_NEW_ACCOUNT_LINK = (By.CSS_SELECTOR, "a:contains('Request new account'')")
 
 	def __init__(self, driver):
-		super(ProfileDropdownMenu, self).__init__(driver, (By.CSS_SELECTOR, u".huddle-header__bar__profile-menu__dropdown"))
+		super(ProfileDropdownMenu, self).__init__(driver, (By.CSS_SELECTOR, ".huddle-header__bar__profile-menu__dropdown"))
 
 	def click_on_company_link(self):
 		from .companyPage import CompanyPage
@@ -73,19 +73,19 @@ class ProfileDropdownMenu(WebComponent):
 class WorkspaceDowndropMenu(WebComponent):
 
 	# locator
-	CREATE_WORKSPACE_LINK = (By.CSS_SELECTOR, u'[data-automation="workspace-select-create-workspace-link"]')
+	CREATE_WORKSPACE_LINK = (By.CSS_SELECTOR, '[data-automation="workspace-select-create-workspace-link"]')
 
 	def __init__(self, driver):
-		super(WorkspaceDowndropMenu, self).__init__(driver, (By.CSS_SELECTOR, u'[data-automation="huddle-header-workspace-select"]'))
+		super(WorkspaceDowndropMenu, self).__init__(driver, (By.CSS_SELECTOR, '[data-automation="huddle-header-workspace-select"]'))
 
 	#@staticmethod
 	def _get_workspace_link_locator(self, workspace_title):
-		workspace_list = self.driver.find_element_by_css_selector(u'[data-automation="workspace-filter-list"]').find_elements_by_tag_name(u"li")
+		workspace_list = self.driver.find_element_by_css_selector('[data-automation="workspace-filter-list"]').find_elements_by_tag_name("li")
 
 		for workspace in workspace_list:
 			if workspace.text == workspace_title:
-				print workspace.text
-				return (By.CSS_SELECTOR, u'[data-automation="workspace-select-workspace-link"]')
+				print(workspace.text)
+				return (By.CSS_SELECTOR, '[data-automation="workspace-select-workspace-link"]')
 
 	def click_create_workspace_link(self):
 		self.click(self.CREATE_WORKSPACE_LINK)

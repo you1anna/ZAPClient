@@ -1,5 +1,4 @@
 setuptools
-python-owasp-zap-v2.4
 selenium
 contexts
 3to2

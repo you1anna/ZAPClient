@@ -25,28 +25,28 @@ class search(object):
         self.zap = zap
 
     def urls_by_url_regex(self, regex, baseurl='', start='', count=''):
-        return next(self.zap._request(self.zap.base + 'search/view/urlsByUrlRegex/', {'regex' : regex, 'baseurl' : baseurl, 'start' : start, 'count' : count}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'search/view/urlsByUrlRegex/', {'regex' : regex, 'baseurl' : baseurl, 'start' : start, 'count' : count}).values()))
 
     def urls_by_request_regex(self, regex, baseurl='', start='', count=''):
-        return next(self.zap._request(self.zap.base + 'search/view/urlsByRequestRegex/', {'regex' : regex, 'baseurl' : baseurl, 'start' : start, 'count' : count}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'search/view/urlsByRequestRegex/', {'regex' : regex, 'baseurl' : baseurl, 'start' : start, 'count' : count}).values()))
 
     def urls_by_response_regex(self, regex, baseurl='', start='', count=''):
-        return next(self.zap._request(self.zap.base + 'search/view/urlsByResponseRegex/', {'regex' : regex, 'baseurl' : baseurl, 'start' : start, 'count' : count}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'search/view/urlsByResponseRegex/', {'regex' : regex, 'baseurl' : baseurl, 'start' : start, 'count' : count}).values()))
 
     def urls_by_header_regex(self, regex, baseurl='', start='', count=''):
-        return next(self.zap._request(self.zap.base + 'search/view/urlsByHeaderRegex/', {'regex' : regex, 'baseurl' : baseurl, 'start' : start, 'count' : count}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'search/view/urlsByHeaderRegex/', {'regex' : regex, 'baseurl' : baseurl, 'start' : start, 'count' : count}).values()))
 
     def messages_by_url_regex(self, regex, baseurl='', start='', count=''):
-        return next(self.zap._request(self.zap.base + 'search/view/messagesByUrlRegex/', {'regex' : regex, 'baseurl' : baseurl, 'start' : start, 'count' : count}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'search/view/messagesByUrlRegex/', {'regex' : regex, 'baseurl' : baseurl, 'start' : start, 'count' : count}).values()))
 
     def messages_by_request_regex(self, regex, baseurl='', start='', count=''):
-        return next(self.zap._request(self.zap.base + 'search/view/messagesByRequestRegex/', {'regex' : regex, 'baseurl' : baseurl, 'start' : start, 'count' : count}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'search/view/messagesByRequestRegex/', {'regex' : regex, 'baseurl' : baseurl, 'start' : start, 'count' : count}).values()))
 
     def messages_by_response_regex(self, regex, baseurl='', start='', count=''):
-        return next(self.zap._request(self.zap.base + 'search/view/messagesByResponseRegex/', {'regex' : regex, 'baseurl' : baseurl, 'start' : start, 'count' : count}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'search/view/messagesByResponseRegex/', {'regex' : regex, 'baseurl' : baseurl, 'start' : start, 'count' : count}).values()))
 
     def messages_by_header_regex(self, regex, baseurl='', start='', count=''):
-        return next(self.zap._request(self.zap.base + 'search/view/messagesByHeaderRegex/', {'regex' : regex, 'baseurl' : baseurl, 'start' : start, 'count' : count}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'search/view/messagesByHeaderRegex/', {'regex' : regex, 'baseurl' : baseurl, 'start' : start, 'count' : count}).values()))
 
     def har_by_url_regex(self, regex, baseurl='', start='', count='', apikey=''):
         return (self.zap._request_other(self.zap.base_other + 'search/other/harByUrlRegex/', {'regex' : regex, 'baseurl' : baseurl, 'start' : start, 'count' : count, 'apikey' : apikey}))

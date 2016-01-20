@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 from ..abstractpageclasses.abstractPage import AbstractPage
 from ..abstractpageclasses.webComponent import WebComponent
 from selenium.webdriver.common.by import By
@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 
 class HuddleBasePage(AbstractPage):
 	globalHeader = None
-	WELCOME_DIALOG_DISMISS_BUTTON = (By.CSS_SELECTOR, u"[data-automation='slideshow-dismiss-button']")
+	WELCOME_DIALOG_DISMISS_BUTTON = (By.CSS_SELECTOR, "[data-automation='slideshow-dismiss-button']")
 
 	def __init__(self, driver, url, has_global_header=True):
 		super(HuddleBasePage, self).__init__(driver, url)
@@ -14,14 +14,14 @@ class HuddleBasePage(AbstractPage):
 			from ..globalHeader import GlobalHeader
 			self.globalHeader = GlobalHeader(driver)
 
-		self.logger.debug(u"Initialised - " + self.__class__.__name__)
+		self.logger.debug("Initialised - " + self.__class__.__name__)
 
 	def dismiss_welcome_dialog(self):
 		self.click(locator=self.WELCOME_DIALOG_DISMISS_BUTTON)
 
 	def sign_out(self):
 		if self.globalHeader is None:
-			raise Exception(u"global header is not registered on page:" + self.current_page())
+			raise Exception("global header is not registered on page:" + self.current_page())
 		else:
 			self.globalHeader.sign_out()
 
@@ -38,11 +38,11 @@ class HuddleBasePage(AbstractPage):
 
 
 class SlideShowFrame(WebComponent):
-	DISMISS_SLIDESHOW_BUTTON = (By.CSS_SELECTOR, u'[data-automation="slideshow-dismiss-button"]')
-	SLIDESHOW_COMPONENT = (By.CSS_SELECTOR, u'[data-automation="component-slideshow"]')
+	DISMISS_SLIDESHOW_BUTTON = (By.CSS_SELECTOR, '[data-automation="slideshow-dismiss-button"]')
+	SLIDESHOW_COMPONENT = (By.CSS_SELECTOR, '[data-automation="component-slideshow"]')
 
 	def __init__(self, driver):
-		super(SlideShowFrame, self).__init__(driver, (By.CSS_SELECTOR, u'[data-automation="component-slideshow"]'))
+		super(SlideShowFrame, self).__init__(driver, (By.CSS_SELECTOR, '[data-automation="component-slideshow"]'))
 
 	def close(self):
 		self.click(self.DISMISS_SLIDESHOW_BUTTON)

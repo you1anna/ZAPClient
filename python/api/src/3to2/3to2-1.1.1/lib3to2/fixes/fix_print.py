@@ -14,7 +14,7 @@ print(1,2,3,file=file) -> print >>file, 1,2,3
 print(1,2,3,sep=" ",end="\n") -> print 1,2,3
 """
 
-from __future__ import with_statement # Aiming for 2.5-compatible code
+ # Aiming for 2.5-compatible code
 
 from lib2to3 import fixer_base
 from lib2to3.pytree import Node, Leaf

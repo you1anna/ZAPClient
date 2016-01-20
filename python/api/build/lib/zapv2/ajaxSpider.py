@@ -29,31 +29,31 @@ class ajaxSpider(object):
         """
         This component is optional and therefore the API will only work if it is installed
         """
-        return next(self.zap._request(self.zap.base + 'ajaxSpider/view/status/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'ajaxSpider/view/status/').values()))
 
     def results(self, start='', count=''):
         """
         This component is optional and therefore the API will only work if it is installed
         """
-        return next(self.zap._request(self.zap.base + 'ajaxSpider/view/results/', {'start' : start, 'count' : count}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'ajaxSpider/view/results/', {'start' : start, 'count' : count}).values()))
 
     @property
     def number_of_results(self):
         """
         This component is optional and therefore the API will only work if it is installed
         """
-        return next(self.zap._request(self.zap.base + 'ajaxSpider/view/numberOfResults/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'ajaxSpider/view/numberOfResults/').values()))
 
     def scan(self, url, inscope='', apikey=''):
         """
         This component is optional and therefore the API will only work if it is installed
         """
-        return next(self.zap._request(self.zap.base + 'ajaxSpider/action/scan/', {'url' : url, 'inScope' : inscope, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'ajaxSpider/action/scan/', {'url' : url, 'inScope' : inscope, 'apikey' : apikey}).values()))
 
     def stop(self, apikey=''):
         """
         This component is optional and therefore the API will only work if it is installed
         """
-        return next(self.zap._request(self.zap.base + 'ajaxSpider/action/stop/', {'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'ajaxSpider/action/stop/', {'apikey' : apikey}).values()))
 
 

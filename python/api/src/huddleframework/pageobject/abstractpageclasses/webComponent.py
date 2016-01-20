@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 import logging
@@ -6,7 +6,7 @@ import logging
 
 class WebComponent(object):
 
-	logger = logging.getLogger(u'tests_logger')
+	logger = logging.getLogger('tests_logger')
 	locator = None
 
 	def __init__(self, driver, locator, wait_time=30):
@@ -25,19 +25,19 @@ class WebComponent(object):
 
 	def clear(self, locator):
 		if __debug__:
-			self.logger.debug(u"Cleared - " + locator[1])
+			self.logger.debug("Cleared - " + locator[1])
 		self.find(locator=locator, condition=expected_conditions.visibility_of_element_located(locator)).clear()
 		return self
 
 	def type(self, locator, msg):
 		if __debug__:
-			self.logger.debug(u"Typed - " + locator[1])
+			self.logger.debug("Typed - " + locator[1])
 		self.find(locator=locator, condition=expected_conditions.visibility_of_element_located(locator)).send_keys(msg)
 		return self
 
 	def click(self, locator):
 		if __debug__:
-			self.logger.debug(u"Clicked - " + locator[1])
+			self.logger.debug("Clicked - " + locator[1])
 		self.find(locator=locator, condition=expected_conditions.visibility_of_element_located(locator)).click()
 		return self
 

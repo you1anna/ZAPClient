@@ -1,5 +1,5 @@
-from __future__ import absolute_import
-__author__ = u'robin.miklinski'
+
+__author__ = 'robin.miklinski'
 from selenium.webdriver.common.by import By
 from ...pageobject.abstractpageclasses.webComponent import WebComponent
 from ...pageobject.workspacePage import WorkspacePage
@@ -9,7 +9,7 @@ from ...pageobject.workspacePage import WorkspaceTabContent
 class FilesDetailsPage(WorkspacePage):
 
 	#TODO Construct this later
-	relative_url = u"https://my.huddle.dev/workspace/{1}/files/#/{2}"
+	relative_url = "https://my.huddle.dev/workspace/{1}/files/#/{2}"
 
 	def __init__(self, driver):
 		super(FilesDetailsPage, self).__init__(driver, self.relative_url)
@@ -18,13 +18,13 @@ class FilesDetailsPage(WorkspacePage):
 
 class _FilesDetailsTab(WorkspaceTabContent):
 
-	FILE_TITLE = (By.CSS_SELECTOR, u'[data-automation="file-header-title"]')
-	LOCK_BUTTON = (By.CSS_SELECTOR, u'[data-automation="lock"]')
-	UNLOCK_BUTTON = (By.CSS_SELECTOR, u'[data-automation="unlock"]')
+	FILE_TITLE = (By.CSS_SELECTOR, '[data-automation="file-header-title"]')
+	LOCK_BUTTON = (By.CSS_SELECTOR, '[data-automation="lock"]')
+	UNLOCK_BUTTON = (By.CSS_SELECTOR, '[data-automation="unlock"]')
 	ActionButtons = None
 
 	def __init__(self, driver):
-		super(_FilesDetailsTab, self).__init__(driver, (By.CSS_SELECTOR, u'[data-automation="file-details-page"]'))
+		super(_FilesDetailsTab, self).__init__(driver, (By.CSS_SELECTOR, '[data-automation="file-details-page"]'))
 		self.ActionButtons = _FilesDetailsActionButtons(self.driver)
 
 	def find_document_title(self):
@@ -39,10 +39,10 @@ class _FilesDetailsTab(WorkspaceTabContent):
 
 class _FilesDetailsActionButtons(WebComponent):
 
-	ADD_REVIEWERS_BUTTON = (By.CSS_SELECTOR, u'[data-automation="actions-add-reviewers-button"]')
+	ADD_REVIEWERS_BUTTON = (By.CSS_SELECTOR, '[data-automation="actions-add-reviewers-button"]')
 
 	def __init__(self, driver):
-		super(_FilesDetailsActionButtons, self).__init__(driver, (By.CSS_SELECTOR, u'[data-automation="file-details-action-buttons"]'))
+		super(_FilesDetailsActionButtons, self).__init__(driver, (By.CSS_SELECTOR, '[data-automation="file-details-action-buttons"]'))
 		pass
 
 	def find_add_reviewers_button(self):

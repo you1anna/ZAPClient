@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 
 import os
-import time
-import platform
 import subprocess
-import zapSelenium
-from config import Settings
+import time
 from pprint import pprint
-from zapv2 import ZAPv2, ZapError
+from python.api import zapSelenium
+from python.api.zapv2 import ZAPv2, ZapError
+from python.api.config import Settings
 
 MEDIUM = "MEDIUM"
 HIGH = "HIGH"
@@ -21,7 +20,7 @@ proxyUrl = Settings['proxyUrl']
 contextFile = Settings['contextFileName']
 zapPath = Settings['zapPath']
 
-root = disk + ":\dev\Huddle-ZAPClient"
+root = disk + ":\dev\Huddle-ZAPClient_3"
 contextFilePath = os.path.join(root, 'Contexts', contextFile)
 
 zap = ZAPv2(proxies={'http': proxyUrl, 'https': proxyUrl})
@@ -30,26 +29,26 @@ if not os.path.exists(zapPath):
 	zapPath = 'C:\Program Files\OWASP\Zed Attack Proxy'
 zapBat = os.path.join(zapPath, 'zap.bat')
 
-print '\n', subprocess.check_output(["java", "-version"], stderr=subprocess.STDOUT), '\n'
-print 'Zap path: ' + zapBat
-print 'Starting ZAP...'
+print((subprocess.check_output(['java', '-version'], stderr=subprocess.STDOUT)))
+print(('Zap path: ' + zapBat))
+print('Starting ZAP...')
 
-subprocess.Popen(zapBat, stdout=open(os.devnull, 'w'), cwd=Settings['zapPath'])
+s = subprocess.Popen(zapBat, stdout=open(os.devnull, 'w'), cwd=Settings['zapPath'])
 version = ''
-while version == '':
-	try:
-		version = zap.core.version
-	except:
-		print 'ZAP not running yet, waiting.'
-		time.sleep(1)
-	else:
-		time.sleep(1)
-print 'ZAP v' + version + ' launched successfully.\n'
+# while version == '':
+# 	try:
+# 		version = zap.core.version
+# 	except:
+# 		print('ZAP not running yet, waiting.')
+# 		time.sleep(1)
+# 	else:
+# 		time.sleep(1)
+print(('ZAP v' + zap.core.version + ' launched successfully.\n'))
 
-print 'Importing Context: ' + contextFilePath
+print('Importing Context: ' + contextFilePath)
 contextId = zap.context.import_context(contextFilePath)
 zap.context.set_context_in_scope(Settings['contextFileName'], True)
-print "ContextID: " + contextId
+print("ContextID: " + contextId)
 
 # Client config
 zap.spider.exclude_from_scan(".*\/leave.*")
@@ -64,7 +63,7 @@ mapDashboardPage = zapSelenium.SeleniumTests()
 mapDashboardPage.test_loginHuddle()
 
 zap.urlopen(myHuddleUri)
-print('Spidering target %s' % myHuddleUri)
+print(('Spidering target %s' % myHuddleUri))
 zap.spider.scan_as_user(loginUrl, userid=userid, contextId=contextId)
 time.sleep(2)
 
@@ -72,27 +71,27 @@ zap.httpsessions.active_session()
 
 try:
 	while int(zap.spider.status()) < 100:
-		print('Spider progress: ' + zap.spider.status() + '%')
+		print(('Spider progress: ' + zap.spider.status() + '%'))
 		time.sleep(2)
-except ZapError, e:
-	print(e.message)
+except ZapError as e:
+	print((e.message))
 
 print('Spider completed')
 time.sleep(5)
 
 # wait
-print('Scanning target %s' % loginUrl)
+print(('Scanning target %s' % loginUrl))
 zap.ascan.scan(loginUrl)
 try:
 	while int(zap.ascan.status()) < 100:
-		print('Scan progress: ' + zap.ascan.status() + '%')
+		print(('Scan progress: ' + zap.ascan.status() + '%'))
 		time.sleep(2)
-except ZapError, e:
+except ZapError as e:
 	print(e.message)
 
 print('Scan completed')
 
-print("Hosts: " + ", ".join(zap.core.hosts))
+print(("Hosts: " + ", ".join(zap.core.hosts)))
 print ('Alerts: ')
 pprint(zap.core.alerts())
 

@@ -1,15 +1,15 @@
-from __future__ import absolute_import
+
 from selenium.webdriver.common.by import By
 from ..pageobject.abstractpageclasses.huddleBasePage import HuddleBasePage
 
 
 class ProfilePage(HuddleBasePage):
 
-	EDIT_PROFILE_BUTTON = (By.CSS_SELECTOR, u'.edit-list')
-	PROFILE_FIRST_AND_LAST_NAME = (By.CSS_SELECTOR, u'[data-automation="profile-display-name"]')
+	EDIT_PROFILE_BUTTON = (By.CSS_SELECTOR, '.edit-list')
+	PROFILE_FIRST_AND_LAST_NAME = (By.CSS_SELECTOR, '[data-automation="profile-display-name"]')
 
 	def __init__(self, driver):
-		self.relative_url = u""
+		self.relative_url = ""
 		super(ProfilePage, self).__init__(driver, self.relative_url)
 
 

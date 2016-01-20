@@ -25,197 +25,197 @@ class spider(object):
         self.zap = zap
 
     def status(self, scanid=''):
-        return next(self.zap._request(self.zap.base + 'spider/view/status/', {'scanId' : scanid}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/status/', {'scanId' : scanid}).values()))
 
     def results(self, scanid=''):
-        return next(self.zap._request(self.zap.base + 'spider/view/results/', {'scanId' : scanid}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/results/', {'scanId' : scanid}).values()))
 
     def full_results(self, scanid):
-        return next(self.zap._request(self.zap.base + 'spider/view/fullResults/', {'scanId' : scanid}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/fullResults/', {'scanId' : scanid}).values()))
 
     @property
     def scans(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/scans/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/scans/').values()))
 
     @property
     def excluded_from_scan(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/excludedFromScan/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/excludedFromScan/').values()))
 
     @property
     def option_max_depth(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionMaxDepth/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionMaxDepth/').values()))
 
     @property
     def option_scope_text(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionScopeText/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionScopeText/').values()))
 
     @property
     def option_scope(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionScope/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionScope/').values()))
 
     @property
     def option_thread_count(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionThreadCount/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionThreadCount/').values()))
 
     @property
     def option_post_form(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionPostForm/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionPostForm/').values()))
 
     @property
     def option_process_form(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionProcessForm/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionProcessForm/').values()))
 
     @property
     def option_skip_url_string(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionSkipURLString/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionSkipURLString/').values()))
 
     @property
     def option_request_wait_time(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionRequestWaitTime/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionRequestWaitTime/').values()))
 
     @property
     def option_user_agent(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionUserAgent/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionUserAgent/').values()))
 
     @property
     def option_parse_comments(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionParseComments/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionParseComments/').values()))
 
     @property
     def option_parse_robots_txt(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionParseRobotsTxt/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionParseRobotsTxt/').values()))
 
     @property
     def option_parse_sitemap_xml(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionParseSitemapXml/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionParseSitemapXml/').values()))
 
     @property
     def option_parse_svn_entries(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionParseSVNEntries/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionParseSVNEntries/').values()))
 
     @property
     def option_parse_git(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionParseGit/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionParseGit/').values()))
 
     @property
     def option_handle_parameters(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionHandleParameters/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionHandleParameters/').values()))
 
     @property
     def option_handle_o_data_parameters_visited(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionHandleODataParametersVisited/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionHandleODataParametersVisited/').values()))
 
     @property
     def option_domains_always_in_scope(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionDomainsAlwaysInScope/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionDomainsAlwaysInScope/').values()))
 
     @property
     def option_domains_always_in_scope_enabled(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionDomainsAlwaysInScopeEnabled/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionDomainsAlwaysInScopeEnabled/').values()))
 
     @property
     def option_max_scans_in_ui(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionMaxScansInUI/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionMaxScansInUI/').values()))
 
     @property
     def option_show_advanced_dialog(self):
-        return next(self.zap._request(self.zap.base + 'spider/view/optionShowAdvancedDialog/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionShowAdvancedDialog/').values()))
 
     @property
     def option_send_referer_header(self):
         """
         Sets whether or not the 'Referer' header should be sent while spidering
         """
-        return next(self.zap._request(self.zap.base + 'spider/view/optionSendRefererHeader/').itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/view/optionSendRefererHeader/').values()))
 
     def scan(self, url, maxchildren='', apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/scan/', {'url' : url, 'maxChildren' : maxchildren, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/scan/', {'url' : url, 'maxChildren' : maxchildren, 'apikey' : apikey}).values()))
 
     def scan_as_user(self, url, contextid, userid, maxchildren, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/scanAsUser/', {'url' : url, 'contextId' : contextid, 'userId' : userid, 'maxChildren' : maxchildren, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/scanAsUser/', {'url' : url, 'contextId' : contextid, 'userId' : userid, 'maxChildren' : maxchildren, 'apikey' : apikey}).values()))
 
     def pause(self, scanid, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/pause/', {'scanId' : scanid, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/pause/', {'scanId' : scanid, 'apikey' : apikey}).values()))
 
     def resume(self, scanid, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/resume/', {'scanId' : scanid, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/resume/', {'scanId' : scanid, 'apikey' : apikey}).values()))
 
     def stop(self, scanid='', apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/stop/', {'scanId' : scanid, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/stop/', {'scanId' : scanid, 'apikey' : apikey}).values()))
 
     def remove_scan(self, scanid, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/removeScan/', {'scanId' : scanid, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/removeScan/', {'scanId' : scanid, 'apikey' : apikey}).values()))
 
     def pause_all_scans(self, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/pauseAllScans/', {'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/pauseAllScans/', {'apikey' : apikey}).values()))
 
     def resume_all_scans(self, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/resumeAllScans/', {'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/resumeAllScans/', {'apikey' : apikey}).values()))
 
     def stop_all_scans(self, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/stopAllScans/', {'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/stopAllScans/', {'apikey' : apikey}).values()))
 
     def remove_all_scans(self, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/removeAllScans/', {'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/removeAllScans/', {'apikey' : apikey}).values()))
 
     def clear_excluded_from_scan(self, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/clearExcludedFromScan/', {'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/clearExcludedFromScan/', {'apikey' : apikey}).values()))
 
     def exclude_from_scan(self, regex, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/excludeFromScan/', {'regex' : regex, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/excludeFromScan/', {'regex' : regex, 'apikey' : apikey}).values()))
 
     def set_option_skip_url_string(self, string, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/setOptionSkipURLString/', {'String' : string, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/setOptionSkipURLString/', {'String' : string, 'apikey' : apikey}).values()))
 
     def set_option_handle_parameters(self, string, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/setOptionHandleParameters/', {'String' : string, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/setOptionHandleParameters/', {'String' : string, 'apikey' : apikey}).values()))
 
     def set_option_scope_string(self, string, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/setOptionScopeString/', {'String' : string, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/setOptionScopeString/', {'String' : string, 'apikey' : apikey}).values()))
 
     def set_option_user_agent(self, string, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/setOptionUserAgent/', {'String' : string, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/setOptionUserAgent/', {'String' : string, 'apikey' : apikey}).values()))
 
     def set_option_max_depth(self, integer, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/setOptionMaxDepth/', {'Integer' : integer, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/setOptionMaxDepth/', {'Integer' : integer, 'apikey' : apikey}).values()))
 
     def set_option_thread_count(self, integer, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/setOptionThreadCount/', {'Integer' : integer, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/setOptionThreadCount/', {'Integer' : integer, 'apikey' : apikey}).values()))
 
     def set_option_post_form(self, boolean, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/setOptionPostForm/', {'Boolean' : boolean, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/setOptionPostForm/', {'Boolean' : boolean, 'apikey' : apikey}).values()))
 
     def set_option_process_form(self, boolean, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/setOptionProcessForm/', {'Boolean' : boolean, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/setOptionProcessForm/', {'Boolean' : boolean, 'apikey' : apikey}).values()))
 
     def set_option_request_wait_time(self, integer, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/setOptionRequestWaitTime/', {'Integer' : integer, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/setOptionRequestWaitTime/', {'Integer' : integer, 'apikey' : apikey}).values()))
 
     def set_option_parse_comments(self, boolean, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/setOptionParseComments/', {'Boolean' : boolean, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/setOptionParseComments/', {'Boolean' : boolean, 'apikey' : apikey}).values()))
 
     def set_option_parse_robots_txt(self, boolean, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/setOptionParseRobotsTxt/', {'Boolean' : boolean, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/setOptionParseRobotsTxt/', {'Boolean' : boolean, 'apikey' : apikey}).values()))
 
     def set_option_parse_sitemap_xml(self, boolean, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/setOptionParseSitemapXml/', {'Boolean' : boolean, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/setOptionParseSitemapXml/', {'Boolean' : boolean, 'apikey' : apikey}).values()))
 
     def set_option_parse_svn_entries(self, boolean, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/setOptionParseSVNEntries/', {'Boolean' : boolean, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/setOptionParseSVNEntries/', {'Boolean' : boolean, 'apikey' : apikey}).values()))
 
     def set_option_parse_git(self, boolean, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/setOptionParseGit/', {'Boolean' : boolean, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/setOptionParseGit/', {'Boolean' : boolean, 'apikey' : apikey}).values()))
 
     def set_option_handle_o_data_parameters_visited(self, boolean, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/setOptionHandleODataParametersVisited/', {'Boolean' : boolean, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/setOptionHandleODataParametersVisited/', {'Boolean' : boolean, 'apikey' : apikey}).values()))
 
     def set_option_max_scans_in_ui(self, integer, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/setOptionMaxScansInUI/', {'Integer' : integer, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/setOptionMaxScansInUI/', {'Integer' : integer, 'apikey' : apikey}).values()))
 
     def set_option_show_advanced_dialog(self, boolean, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/setOptionShowAdvancedDialog/', {'Boolean' : boolean, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/setOptionShowAdvancedDialog/', {'Boolean' : boolean, 'apikey' : apikey}).values()))
 
     def set_option_send_referer_header(self, boolean, apikey=''):
-        return next(self.zap._request(self.zap.base + 'spider/action/setOptionSendRefererHeader/', {'Boolean' : boolean, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'spider/action/setOptionSendRefererHeader/', {'Boolean' : boolean, 'apikey' : apikey}).values()))
 
 

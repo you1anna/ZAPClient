@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 from selenium.webdriver.common.by import By
 from ..pageobject.abstractpageclasses.huddleBasePage import HuddleBasePage
 from ..pageobject.abstractpageclasses.webComponent import WebComponent
@@ -6,13 +6,13 @@ from ..pageobject.abstractpageclasses.webComponent import WebComponent
 
 class EditProfilePage(HuddleBasePage):
 
-	EDIT_PROFILE_TAB_BUTTON = (By.CSS_SELECTOR, u'[data-automation="tab-editmyprofile"]')
-	MY_SETTING_TAB_BUTTON = (By.CSS_SELECTOR, u'[data-automation="tab-mysettings"]')
-	CHANGE_MY_PASSWORD_TAB_BUTTON = (By.CSS_SELECTOR, u'[data-automation="tab-changepassword"]')
+	EDIT_PROFILE_TAB_BUTTON = (By.CSS_SELECTOR, '[data-automation="tab-editmyprofile"]')
+	MY_SETTING_TAB_BUTTON = (By.CSS_SELECTOR, '[data-automation="tab-mysettings"]')
+	CHANGE_MY_PASSWORD_TAB_BUTTON = (By.CSS_SELECTOR, '[data-automation="tab-changepassword"]')
 	PROFILE_SETTINGS_TAB = None
 
 	def __init__(self, driver):
-		self.relative_url = u"/myhuddle/profile.aspx"
+		self.relative_url = "/myhuddle/profile.aspx"
 		super(EditProfilePage, self).__init__(driver, self.relative_url)
 		self.PROFILE_SETTINGS_TAB = EditMyProfileTab(driver)
 
@@ -33,15 +33,15 @@ class EditProfilePage(HuddleBasePage):
 
 
 class EditMyProfileTab(WebComponent):
-	PROFILE_PICTURE_BROWSER = (By.ID, u'ctl00_ctl00_ctl00_pageBody_BodyColumn_WorkFrameContent_fuUploadPicture')
-	DISPLAY_NAME_TEXTBOX = (By.ID, u'ctl00_ctl00_ctl00_pageBody_BodyColumn_WorkFrameContent_tbDisplayName')
-	FIRST_NAME_TEXTBOX = (By.ID, u'ctl00_ctl00_ctl00_pageBody_BodyColumn_WorkFrameContent_tbFirstname')
-	LAST_NAME_TEXTBOX = (By.ID, u'ctl00_ctl00_ctl00_pageBody_BodyColumn_WorkFrameContent_tbLastname')
-	COMPANY_NAME_TEXTBOX = (By.ID, u'ctl00_ctl00_ctl00_pageBody_BodyColumn_WorkFrameContent_tbCompany')
-	UPDATE_BUTTON = (By.ID, u'ctl00_ctl00_ctl00_pageBody_BodyColumn_WorkFrameContent_btnSaveProfile')
+	PROFILE_PICTURE_BROWSER = (By.ID, 'ctl00_ctl00_ctl00_pageBody_BodyColumn_WorkFrameContent_fuUploadPicture')
+	DISPLAY_NAME_TEXTBOX = (By.ID, 'ctl00_ctl00_ctl00_pageBody_BodyColumn_WorkFrameContent_tbDisplayName')
+	FIRST_NAME_TEXTBOX = (By.ID, 'ctl00_ctl00_ctl00_pageBody_BodyColumn_WorkFrameContent_tbFirstname')
+	LAST_NAME_TEXTBOX = (By.ID, 'ctl00_ctl00_ctl00_pageBody_BodyColumn_WorkFrameContent_tbLastname')
+	COMPANY_NAME_TEXTBOX = (By.ID, 'ctl00_ctl00_ctl00_pageBody_BodyColumn_WorkFrameContent_tbCompany')
+	UPDATE_BUTTON = (By.ID, 'ctl00_ctl00_ctl00_pageBody_BodyColumn_WorkFrameContent_btnSaveProfile')
 
 	def __init__(self, driver):
-		super(EditMyProfileTab, self).__init__(driver, (By.ID, u'profile-settings'))
+		super(EditMyProfileTab, self).__init__(driver, (By.ID, 'profile-settings'))
 
 	def type_display_name(self, display_name):
 		self.clear(self.DISPLAY_NAME_TEXTBOX)

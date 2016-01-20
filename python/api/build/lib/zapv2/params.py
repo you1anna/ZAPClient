@@ -28,6 +28,6 @@ class params(object):
         """
         Shows the parameters for the specified site, or for all sites if the site is not specified
         """
-        return next(self.zap._request(self.zap.base + 'params/view/params/', {'site' : site}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'params/view/params/', {'site' : site}).values()))
 
 

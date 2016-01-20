@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 from selenium.webdriver.common.by import By
 from ..pageobject.abstractpageclasses.huddleBasePage import HuddleBasePage
 from ..pageobject.activationPage import ActivationPage
@@ -6,31 +6,31 @@ from ..pageobject.activationPage import ActivationPage
 
 class CreateAccountPage(HuddleBasePage):
 
-	FIRSTNAME_FIELD = (By.CSS_SELECTOR, u'[data-automation="firstName_field"]')
-	LASTNAME_FIELD = (By.CSS_SELECTOR, u'[data-automation="lastName_field"]')
-	EMAIL_FIELD = (By.CSS_SELECTOR, u'[data-automation="email_field"]')
-	CONFIRMEMAIL_FIELD = (By.CSS_SELECTOR, u'[data-automation="confirmEmail_field"]')
-	TELEPHONE_FIELD = (By.CSS_SELECTOR, u'[data-automation="telephone_field"]')
-	COMPANY_FIELD = (By.CSS_SELECTOR, u'[data-automation="company_field"]')
-	PASSWORD_FIELD = (By.CSS_SELECTOR, u'[data-automation="password_field"]')
-	CONFIRMPASSWORD_FIELD = (By.CSS_SELECTOR, u'[data-automation="confirmPassword_field"]')
-	USERNAME_FIELD = (By.CSS_SELECTOR, u'[data-automation="username_field"]')
-	TERMSOFSERVICE_CHECKBOX = (By.CSS_SELECTOR, u'[data-automation="termsOfService_checkbox"]')
-	CREATE_BUTTON = (By.CSS_SELECTOR, u'[data-automation="create_button"]')
+	FIRSTNAME_FIELD = (By.CSS_SELECTOR, '[data-automation="firstName_field"]')
+	LASTNAME_FIELD = (By.CSS_SELECTOR, '[data-automation="lastName_field"]')
+	EMAIL_FIELD = (By.CSS_SELECTOR, '[data-automation="email_field"]')
+	CONFIRMEMAIL_FIELD = (By.CSS_SELECTOR, '[data-automation="confirmEmail_field"]')
+	TELEPHONE_FIELD = (By.CSS_SELECTOR, '[data-automation="telephone_field"]')
+	COMPANY_FIELD = (By.CSS_SELECTOR, '[data-automation="company_field"]')
+	PASSWORD_FIELD = (By.CSS_SELECTOR, '[data-automation="password_field"]')
+	CONFIRMPASSWORD_FIELD = (By.CSS_SELECTOR, '[data-automation="confirmPassword_field"]')
+	USERNAME_FIELD = (By.CSS_SELECTOR, '[data-automation="username_field"]')
+	TERMSOFSERVICE_CHECKBOX = (By.CSS_SELECTOR, '[data-automation="termsOfService_checkbox"]')
+	CREATE_BUTTON = (By.CSS_SELECTOR, '[data-automation="create_button"]')
 
 	def __init__(self, driver):
-		self.relative_url = u"/signup/createaccount.aspx?package=package_freetrial"
+		self.relative_url = "/signup/createaccount.aspx?package=package_freetrial"
 		super(CreateAccountPage, self).__init__(driver, self.relative_url, False)
 
 	def register_new_user(self, user):
-		u"""
+		"""
 		:param user: dictionary of user attributes e.g. data.datagenerator.userprofile
 		:return: PageObject.ActivationPage
 		"""
-		self._type_first_and_last_name(user[u'FirstName'], user[u'LastName'])
-		self._type_email(user[u'Email'])
-		self._type_telephone_and_company(user[u'Telephone'], user[u'Company'])
-		self._type_username_and_password(user[u'Username'], user[u'Password'])
+		self._type_first_and_last_name(user['FirstName'], user['LastName'])
+		self._type_email(user['Email'])
+		self._type_telephone_and_company(user['Telephone'], user['Company'])
+		self._type_username_and_password(user['Username'], user['Password'])
 		self._click_agreement()
 		return self._click_create()
 

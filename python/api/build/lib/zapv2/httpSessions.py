@@ -25,36 +25,36 @@ class httpSessions(object):
         self.zap = zap
 
     def sessions(self, site, session=''):
-        return next(self.zap._request(self.zap.base + 'httpSessions/view/sessions/', {'site' : site, 'session' : session}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'httpSessions/view/sessions/', {'site' : site, 'session' : session}).values()))
 
     def active_session(self, site):
-        return next(self.zap._request(self.zap.base + 'httpSessions/view/activeSession/', {'site' : site}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'httpSessions/view/activeSession/', {'site' : site}).values()))
 
     def session_tokens(self, site):
-        return next(self.zap._request(self.zap.base + 'httpSessions/view/sessionTokens/', {'site' : site}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'httpSessions/view/sessionTokens/', {'site' : site}).values()))
 
     def create_empty_session(self, site, session='', apikey=''):
-        return next(self.zap._request(self.zap.base + 'httpSessions/action/createEmptySession/', {'site' : site, 'session' : session, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'httpSessions/action/createEmptySession/', {'site' : site, 'session' : session, 'apikey' : apikey}).values()))
 
     def remove_session(self, site, session, apikey=''):
-        return next(self.zap._request(self.zap.base + 'httpSessions/action/removeSession/', {'site' : site, 'session' : session, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'httpSessions/action/removeSession/', {'site' : site, 'session' : session, 'apikey' : apikey}).values()))
 
     def set_active_session(self, site, session, apikey=''):
-        return next(self.zap._request(self.zap.base + 'httpSessions/action/setActiveSession/', {'site' : site, 'session' : session, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'httpSessions/action/setActiveSession/', {'site' : site, 'session' : session, 'apikey' : apikey}).values()))
 
     def unset_active_session(self, site, apikey=''):
-        return next(self.zap._request(self.zap.base + 'httpSessions/action/unsetActiveSession/', {'site' : site, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'httpSessions/action/unsetActiveSession/', {'site' : site, 'apikey' : apikey}).values()))
 
     def add_session_token(self, site, sessiontoken, apikey=''):
-        return next(self.zap._request(self.zap.base + 'httpSessions/action/addSessionToken/', {'site' : site, 'sessionToken' : sessiontoken, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'httpSessions/action/addSessionToken/', {'site' : site, 'sessionToken' : sessiontoken, 'apikey' : apikey}).values()))
 
     def remove_session_token(self, site, sessiontoken, apikey=''):
-        return next(self.zap._request(self.zap.base + 'httpSessions/action/removeSessionToken/', {'site' : site, 'sessionToken' : sessiontoken, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'httpSessions/action/removeSessionToken/', {'site' : site, 'sessionToken' : sessiontoken, 'apikey' : apikey}).values()))
 
     def set_session_token_value(self, site, session, sessiontoken, tokenvalue, apikey=''):
-        return next(self.zap._request(self.zap.base + 'httpSessions/action/setSessionTokenValue/', {'site' : site, 'session' : session, 'sessionToken' : sessiontoken, 'tokenValue' : tokenvalue, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'httpSessions/action/setSessionTokenValue/', {'site' : site, 'session' : session, 'sessionToken' : sessiontoken, 'tokenValue' : tokenvalue, 'apikey' : apikey}).values()))
 
     def rename_session(self, site, oldsessionname, newsessionname, apikey=''):
-        return next(self.zap._request(self.zap.base + 'httpSessions/action/renameSession/', {'site' : site, 'oldSessionName' : oldsessionname, 'newSessionName' : newsessionname, 'apikey' : apikey}).itervalues())
+        return next(iter(self.zap._request(self.zap.base + 'httpSessions/action/renameSession/', {'site' : site, 'oldSessionName' : oldsessionname, 'newSessionName' : newsessionname, 'apikey' : apikey}).values()))
 
 

@@ -1,7 +1,7 @@
 from selenium import webdriver
-from config import Settings
-from src.huddleframework.pageobject.dashboardPage import DashboardPage
-from baseUnitTestCase import BaseUnitTestCase
+from python.api.config import Settings
+from python.api.src.huddleframework.pageobject.dashboardPage import DashboardPage
+from python.api.baseUnitTestCase import BaseUnitTestCase
 
 
 class SeleniumTests(BaseUnitTestCase):

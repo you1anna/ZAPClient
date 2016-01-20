@@ -1,1 +1,1 @@
-__author__ = u'jamie.wong'
+__author__ = 'jamie.wong'
