@@ -188,7 +188,10 @@ types of data
 # subprocess.Popen(['C:\Program Files\OWASP\Zed Attack Proxy\zap.bat', '-daemon'], stdout=open(os.devnull, 'w'))
 # subprocess.Popen(['/home/usman/ZAP_2.1.0/zap.sh','-daemon'],stdout=open(os.devnull,'w'))
 
+Path
+C:\Users\robin.miklinski\AppData\Roaming\npm;C:\Users\robin.miklinski\Unix Utils;C:\Users\robin.miklinski\Desktop\test folder;C:\Python34;C:\Python27;C:\Python27\Scripts;C:\Users\robin.miklinski\AppData\Local\atom\bin
 
+C:\Users\robin.miklinski\AppData\Roaming\npm;C:\Users\robin.miklinski\Unix Utils;C:\Users\robin.miklinski\Desktop\test folder;C:\Python27;C:\Python27\Scripts;C:\Users\robin.miklinski\AppData\Local\atom\bin;C:\Program Files\Python 3.5
 
-
-
+install python v3.5.1
+C:\Users\robin.miklinski\AppData\Local\Programs\Python\Python35-32\Scripts\;C:\Users\robin.miklinski\AppData\Local\Programs\Python\Python35-32\;C:\Users\robin.miklinski\AppData\Roaming\npm;C:\Users\robin.miklinski\Unix Utils;C:\Users\robin.miklinski\Desktop\test folder;C:\Python27;C:\Python27\Scripts;C:\Users\robin.miklinski\AppData\Local\atom\bin;C:\Program Files\Python 3.5

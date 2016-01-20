@@ -30,8 +30,8 @@ if not os.path.exists(zapPath):
 	zapPath = 'C:\Program Files\OWASP\Zed Attack Proxy'
 zapBat = os.path.join(zapPath, 'zap.bat')
 
-print subprocess.check_output(["java", "-version"], stderr=subprocess.STDOUT), '\n'
-print 'Zap path = ' + zapBat
+print '\n', subprocess.check_output(["java", "-version"], stderr=subprocess.STDOUT), '\n'
+print 'Zap path: ' + zapBat
 print 'Starting ZAP...'
 
 subprocess.Popen(zapBat, stdout=open(os.devnull, 'w'), cwd=Settings['zapPath'])
@@ -46,10 +46,10 @@ while version == '':
 		time.sleep(1)
 print 'ZAP v' + version + ' launched successfully.\n'
 
-
+print 'Importing Context: ' + contextFilePath
 contextId = zap.context.import_context(contextFilePath)
 zap.context.set_context_in_scope(Settings['contextFileName'], True)
-print "contextID: " + contextId
+print "ContextID: " + contextId
 
 # Client config
 zap.spider.exclude_from_scan(".*\/leave.*")

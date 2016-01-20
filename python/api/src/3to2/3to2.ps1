@@ -8,6 +8,6 @@ $files | % {
 	if($containsPy -contains $true)
 	{	
 		Write-Host "Converting..." $_.fullname
-		python3 3to2 -w -n $_.fullname
+		python 3to2 -w -n $_.fullname
 	}
 }

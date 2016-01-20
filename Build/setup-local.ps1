@@ -1,4 +1,3 @@
-$root = get-location
 python2 -m pip install virtualenv
 python2 -m virtualenv env
 .\env\Scripts\activate
