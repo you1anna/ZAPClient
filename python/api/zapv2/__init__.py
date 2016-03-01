@@ -23,27 +23,28 @@ __docformat__ = 'restructuredtext'
 
 import json
 import urllib.request, urllib.parse, urllib.error
-from .acsrf import acsrf
-from .ascan import ascan
-from .ajaxSpider import ajaxSpider
-from .authentication import authentication
-from .autoupdate import autoupdate
-from .brk import brk
-from .context import context
-from .core import core
-from .forcedUser import forcedUser
-from .httpSessions import httpSessions
-from .importLogFiles import importLogFiles
-from .params import params
-from .pnh import pnh
-from .pscan import pscan
-from .reveal import reveal
-from .script import script
-from .search import search
-from .selenium import selenium
-from .sessionManagement import sessionManagement
-from .spider import spider
-from .users import users
+from python.api.zapv2.acsrf import acsrf
+from python.api.zapv2.ascan import ascan
+from python.api.zapv2.ajaxSpider import ajaxSpider
+from python.api.zapv2.authentication import authentication
+from python.api.zapv2.autoupdate import autoupdate
+from python.api.zapv2.brk import brk
+from python.api.zapv2.context import context
+from python.api.zapv2.core import core
+from python.api.zapv2.forcedUser import forcedUser
+from python.api.zapv2.httpSessions import httpSessions
+from python.api.zapv2.importLogFiles import importLogFiles
+from python.api.zapv2.params import params
+from python.api.zapv2.pnh import pnh
+from python.api.zapv2.pscan import pscan
+from python.api.zapv2.reveal import reveal
+from python.api.zapv2.script import script
+from python.api.zapv2.search import search
+from python.api.zapv2.selenium import selenium
+from python.api.zapv2.sessionManagement import sessionManagement
+from python.api.zapv2.spider import spider
+from python.api.zapv2.users import users
+
 
 class ZapError(Exception):
     """
@@ -63,18 +64,18 @@ class ZAPv2(object):
     base_other = 'http://zap/OTHER/'
 
     def __init__(self, proxies={'http': 'http://127.0.0.1:8080',
-        'https': 'http://127.0.0.1:8080'}):
+                                'https': 'http://127.0.0.1:8080'}):
         """
         Creates an instance of the ZAP api client.
 
         :Parameters:
            - `proxies`: dictionary of ZAP proxies to use.
-           
+
         Note that all of the other classes in this directory are generated
         new ones will need to be manually added to this file
         """
-        self.__proxies = proxies
-        
+        # self.__proxies = proxies
+
         self.acsrf = acsrf(self)
         self.ajaxSpider = ajaxSpider(self)
         self.ascan = ascan(self)
@@ -97,6 +98,10 @@ class ZAPv2(object):
         self.spider = spider(self)
         self.users = users(self)
 
+        self.proxy_handler = urllib.request.ProxyHandler(proxies)
+        self.opener = urllib.request.build_opener(self.proxy_handler)
+        urllib.request.install_opener(self.opener)
+
     def _expect_ok(self, json_data):
         """
         Checks that we have an OK response, else raises an exception.
@@ -116,21 +121,39 @@ class ZAPv2(object):
            - `args`:  all non-keyword arguments.
            - `kwargs`: all other keyword arguments.
         """
-        kwargs['proxies'] = self.__proxies
-        return urllib.request.urlopen(*args, **kwargs).read()
+        # kwargs['proxies'] = self.__proxies
+        try:
+            data = urllib.request.urlopen(*args, **kwargs).read()
+            print("INFO FROM {}: {}".format(*args, data))
+            if self.isJson(data):
+                data = data.decode('utf-8')
+                print("INFO FROM {}: {}".format(*args, data))
+                return data
+            else:
+                return data
+        except Exception as e:
+            print("ARGS: {}".format(*args))
+            return ""
+
+    def isJson(self, data):
+        try:
+            json.loads(data.decode('utf-8'))
+            return True
+        except Exception as e:
+            return False
 
     def status_code(self, *args, **kwargs):
-      """
-      Open a url forcing the proxies to be used.
+        """
+        Open a url forcing the proxies to be used.
 
-      :Parameters:
-         - `args`: all non-keyword arguments.
-         - `kwargs`: all other keyword arguments.
-      """
-      kwargs['proxies'] = self.__proxies
-      return urllib.request.urlopen(*args, **kwargs).getcode()
+        :Parameters:
+           - `args`: all non-keyword arguments.
+           - `kwargs`: all other keyword arguments.
+        """
+        # kwargs['proxies'] = self.__proxies
+        return urllib.request.urlopen(*args, **kwargs).getcode()
 
-    def _request(self, url, get={}):
+    def _request(self, url, get):
         """
         Shortcut for a GET request.
 
@@ -138,9 +161,11 @@ class ZAPv2(object):
            - `url`: the url to GET at.
            - `get`: the disctionary to turn into GET variables.
         """
-        return json.loads(self.urlopen(url + '?' + urllib.parse.urlencode(get)))
+        print("URL == {}".format(url))
+        data = self.urlopen("{}{}{}".format(url, '?', str(urllib.parse.urlencode(get))))
+        return json.load(data)
 
-    def _request_other(self, url, get={}):
+    def _request_other(self, url, get):
         """
         Shortcut for an API OTHER GET request.
 
@@ -148,4 +173,4 @@ class ZAPv2(object):
            - `url`: the url to GET at.
            - `get`: the disctionary to turn into GET variables.
         """
-        return self.urlopen(url + '?' + urllib.parse.urlencode(get))
+        return self.urlopen("{}{}{}".format(url, '?', str(urllib.parse.urlencode(get))))
