@@ -20,13 +20,13 @@ proxyUrl = Settings['proxyUrl']
 contextFile = Settings['contextFileName']
 zapPath = Settings['zapPath']
 
-root = disk + ":\dev\Huddle-ZAPClient_3"
+root = disk + ":\dev\Huddle-ZAPClient"
 contextFilePath = os.path.join(root, 'Contexts', contextFile)
 
 zap = ZAPv2(proxies={'http': proxyUrl, 'https': proxyUrl})
 
 if not os.path.exists(zapPath):
-	zapPath = 'C:\Program Files\OWASP\Zed Attack Proxy'
+    zapPath = 'C:\Program Files\OWASP\Zed Attack Proxy'
 zapBat = os.path.join(zapPath, 'zap.bat')
 
 print((subprocess.check_output(['java', '-version'], stderr=subprocess.STDOUT)))
@@ -34,18 +34,19 @@ print(('Zap path: ' + zapBat))
 print('Starting ZAP...')
 
 s = subprocess.Popen(zapBat, stdout=open(os.devnull, 'w'), cwd=Settings['zapPath'])
-version = ''
+# version = ''
 # while version == '':
-# 	try:
-# 		version = zap.core.version
-# 	except:
-# 		print('ZAP not running yet, waiting.')
-# 		time.sleep(1)
-# 	else:
-# 		time.sleep(1)
-print(('ZAP v' + zap.core.version + ' launched successfully.\n'))
+#     try:
+#         version = zap.core.version()
+#     except:
+#         print('ZAP not running yet, waiting.')
+#         time.sleep(1)
+#     else:
+#         # time.sleep(1)
 
-print('Importing Context: ' + contextFilePath)
+print('ZAP v' + zap.core.version() + ' launched successfully.\n')
+
+print("Importing Context: " + contextFilePath)
 contextId = zap.context.import_context(contextFilePath)
 zap.context.set_context_in_scope(Settings['contextFileName'], True)
 print("ContextID: " + contextId)
@@ -68,13 +69,14 @@ zap.spider.scan_as_user(loginUrl, userid=userid, contextId=contextId)
 time.sleep(2)
 
 zap.httpsessions.active_session()
+# mark token as session token
 
 try:
-	while int(zap.spider.status()) < 100:
-		print(('Spider progress: ' + zap.spider.status() + '%'))
-		time.sleep(2)
+    while int(zap.spider.status()) < 100:
+        print(('Spider progress: ' + zap.spider.status() + '%'))
+        time.sleep(2)
 except ZapError as e:
-	print((e.message))
+    print(e)
 
 print('Spider completed')
 time.sleep(5)
@@ -83,16 +85,17 @@ time.sleep(5)
 print(('Scanning target %s' % loginUrl))
 zap.ascan.scan(loginUrl)
 try:
-	while int(zap.ascan.status()) < 100:
-		print(('Scan progress: ' + zap.ascan.status() + '%'))
-		time.sleep(2)
+    while int(zap.ascan.status()) < 100:
+        print(('Scan progress: ' + zap.ascan.status() + '%'))
+        time.sleep(2)
 except ZapError as e:
-	print(e.message)
+    print(e)
 
 print('Scan completed')
 
 print(("Hosts: " + ", ".join(zap.core.hosts)))
-print ('Alerts: ')
+print('Alerts: ')
+report = zap.core.htmlreport()
 pprint(zap.core.alerts())
 
 # def scanBeforeLogin():
