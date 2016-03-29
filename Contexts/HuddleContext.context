@@ -10,6 +10,10 @@
 <incregexes>\Qhttps://my.huddle.test\E.*</incregexes>
 <incregexes>\Qhttps://api.huddle.test\E.*</incregexes>
 <incregexes>\Qhttps://login.huddle.test\E.*</incregexes>
+<incregexes>\Qhttps://login.huddle.ci\E.*</incregexes>
+<incregexes>\Qhttps://my.huddle.ci\E.*</incregexes>
+<incregexes>\Qhttps://api.huddle.ci\E.*</incregexes>
+<excregexes>https://my.huddle.test/myhuddle/workspaces/create.aspx</excregexes>
 <tech>
 <include>Db.Firebird</include>
 <include>Db.HypersonicSQL</include>

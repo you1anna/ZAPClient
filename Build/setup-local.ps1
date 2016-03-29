@@ -4,7 +4,7 @@ python -m venv env
 pip install -r requirements.txt
 cd ..\..\Huddle\Huddle-Selenium-Framework\huddleframeworksrc\framework\
 python setup.py develop
-cd ..\..\..\..\Huddle-ZAPClient_3\python-owasp-zap\
+cd ..\..\..\..\Huddle-ZAPClient\python-owasp-zap\
 python setup.py build
 cd ..\python\api\
 deactivate
