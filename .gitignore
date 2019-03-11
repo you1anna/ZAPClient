@@ -7,3 +7,5 @@ python/api/new.py
 python/api/test_zap.py
 python/api/z_test.py
 python/api/zapcmd.py
+.idea/misc.xml
+.idea/workspace.xml
